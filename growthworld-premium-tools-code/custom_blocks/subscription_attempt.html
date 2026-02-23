@@ -1,0 +1,70 @@
+<style>
+  .thank-you-container {
+    max-width: 600px; 
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    padding: 2rem;
+  }
+  .thank-you-container h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #007bff;
+  }
+  .thank-you-container p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .dashboard-link {
+    display: inline-block;
+    padding: 0.8rem 1.2rem;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  .dashboard-link:hover {
+    background-color: #0056b3;
+  }
+  @media (max-width: 480px) {
+    .thank-you-container h1 {
+      font-size: 1.6rem;
+    }
+    .thank-you-container p {
+      font-size: 0.95rem;
+    }
+  }
+</style>
+
+<div class="thank-you-container">
+  <h1>Subscription Timeout In Effect</h1>
+  <p>
+    You recently made a subscription attempt.  
+    Please wait <span id="countdown">60</span> seconds before trying again.
+  </p>
+  <a href="/growthworld-premium-tools/dashboard">Back to Dashboard</a>
+</div>
+
+<script>
+  // Adjust the timeout length as needed
+  let totalSeconds = {{custom_block_remaining_seconds}}; 
+  const countdownElem = document.getElementById('countdown');
+
+  // Initialize the display
+  countdownElem.innerText = totalSeconds;
+
+  // Decrement countdown every second
+  const timer = setInterval(() => {
+    totalSeconds--;
+    if (totalSeconds <= 0) {
+      clearInterval(timer);
+      countdownElem.innerText = '0';
+      // Optionally, you can redirect or enable retry here
+      // window.location.href = '/retry-subscription'; 
+    } else {
+      countdownElem.innerText = totalSeconds;
+    }
+  }, 1000);
+</script>

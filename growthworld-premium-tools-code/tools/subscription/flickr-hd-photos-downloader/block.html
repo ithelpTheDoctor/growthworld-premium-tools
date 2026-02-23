@@ -1,0 +1,276 @@
+<style>
+/* Optional: keep same embed style as your other tool pages */
+.youtube-embed-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+}
+.youtube-embed {
+    width: 100%;
+    max-width: 560px;
+    aspect-ratio: 16 / 9;
+    background: #000;
+}
+.youtube-embed iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+</style>
+
+<h1>Flickr HD Photos Downloader – Save Ultra-High-Resolution Images & Albums</h1>
+
+<h2>Paste Any Flickr Photo or Album URL and Download in 3K, 4K, 6K, or Original</h2>
+
+<p>
+    <strong>Flickr HD Photos Downloader</strong> is a practical, no-nonsense solution for saving Flickr images in the
+    <strong>highest available quality</strong>. Paste a single photo link or an entire album URL and the tool will detect
+    the best-quality versions (3K, 4K, 6K, or original size when available) and download them to your computer. It’s built for
+    <strong>photographers, designers, researchers, students, bloggers, and archivists</strong> who need reliable, bulk-friendly,
+    and metadata-aware downloads without quality loss or manual hassle.
+</p>
+
+<p>
+    Unlike web extensions that break frequently or random scripts that throttle mid-batch, this downloader focuses on
+    <strong>accuracy, consistency, and control</strong>. You choose the input (photo or album), set your output folder,
+    and let the app fetch high-resolution files while preserving clean filenames and optional metadata exports. If you want to
+    <strong>save original-quality images from Flickr</strong> quickly and repeatedly, this tool was made for you.
+</p>
+
+<h3>🚀 Why Choose Flickr HD Photos Downloader?</h3>
+
+<ul>
+    <li>✅ <strong>Highest Quality First:</strong> Targets 3K, 4K, 6K, or the original uploaded resolution when available.</li>
+    <li>✅ <strong>Album-Scale Downloads:</strong> Paste an album URL and fetch every photo automatically.</li>
+    <li>✅ <strong>Bulk Mode:</strong> Handles dozens or hundreds of images without you babysitting the process.</li>
+    <li>✅ <strong>Smart Skips:</strong> Avoids re-downloading duplicates and can resume where you left off.</li>
+    <li>✅ <strong>Clean Filenames:</strong> Uses stable, readable naming with optional indexing.</li>
+    <li>✅ <strong>Metadata Aware:</strong> Optionally export titles, tags, dates, and source links to CSV.</li>
+    <li>✅ <strong>Simple UI:</strong> Paste → Choose quality → Download. No learning curve.</li>
+    <li>✅ <strong>Lightweight:</strong> Efficient logic built for sustained runs and big collections.</li>
+</ul>
+
+<h3>🎯 What You Can Do with It</h3>
+
+<ul>
+    <li><strong>Single Photo Grab:</strong> Paste the photo URL and save the highest-resolution image available.</li>
+    <li><strong>Album Collector:</strong> Paste an album link and automatically retrieve every photo in ultra-HD.</li>
+    <li><strong>Research & Reference:</strong> Build curated, high-quality datasets for study, inspiration, or analysis.</li>
+    <li><strong>Backup Your Work:</strong> If you publish to Flickr, batch-download your portfolio in original quality.</li>
+    <li><strong>Creative Workflows:</strong> Designers and content creators can quickly populate mood boards and drafts.</li>
+</ul>
+
+<h3>🧩 Key Features (Deep Dive)</h3>
+
+<ul>
+    <li><strong>Flexible Input:</strong>
+        <ul>
+            <li>Paste a <em>photo URL</em> (tool saves that specific image).</li>
+            <li>Paste an <em>album URL</em> (tool saves the entire set).</li>
+        </ul>
+    </li>
+    <li><strong>Resolution Priority:</strong>
+        <ul>
+            <li>Targets <em>Original</em> when accessible, else falls back through <em>6K → 4K → 3K</em> tiers.</li>
+            <li>Optional lock to a specific max tier (e.g., download only up to 4K).</li>
+        </ul>
+    </li>
+    <li><strong>Bulk & Resume Logic:</strong>
+        <ul>
+            <li>Skips already downloaded files by hash or filename.</li>
+            <li>Can resume long runs after interruptions without starting over.</li>
+        </ul>
+    </li>
+    <li><strong>Output Control:</strong>
+        <ul>
+            <li>Choose a base folder; album downloads create neat subfolders.</li>
+            <li>Filename templates with placeholders like <code>{index}</code>, <code>{title}</code>, <code>{photo_id}</code>.</li>
+        </ul>
+    </li>
+    <li><strong>Metadata Export (Optional):</strong>
+        <ul>
+            <li>CSV with columns like Title, Description, Author, Tags, Date, Source URL, Saved Path.</li>
+            <li>Great for cataloging, research notes, and credit tracking.</li>
+        </ul>
+    </li>
+    <li><strong>Robust Error Handling:</strong>
+        <ul>
+            <li>Retries transient failures with backoff.</li>
+            <li>Clear progress logs to troubleshoot any skipped or restricted items.</li>
+        </ul>
+    </li>
+</ul>
+
+<h3>🛠️ How to Use (Step-by-Step)</h3>
+
+<ol>
+    <li>📥 <strong>Launch the app</strong> (no complicated setup required).</li>
+    <li>🔗 <strong>Paste a Flickr URL:</strong> either a single <em>photo</em> link or an <em>album</em> link.</li>
+    <li>🗂️ <strong>Choose your output folder</strong> and (optionally) a filename template.</li>
+    <li>🖼️ <strong>Pick quality</strong> (Original, or the highest tier like 6K/4K/3K you want to target).</li>
+    <li>▶️ <strong>Start Download:</strong> watch the progress log as images are saved.</li>
+    <li>📄 <strong>(Optional)</strong> Enable CSV export to capture titles, authors, tags, and source URLs.</li>
+    <li>✅ <strong>Done:</strong> open the output folder — your images are ready in ultra-high resolution.</li>
+</ol>
+
+<h3>💡 Pro Tips for Power Users</h3>
+
+<ul>
+    <li><strong>Curate First:</strong> For massive albums, skim the set on Flickr and use “faves” or folders to keep downloads focused.</li>
+    <li><strong>Template Filenames:</strong> Include <code>{photo_id}</code> to ensure uniqueness across large datasets.</li>
+    <li><strong>Tier Cap:</strong> If storage is tight, cap at 4K — still excellent quality for print and design drafts.</li>
+    <li><strong>CSV + Credits:</strong> Use the CSV to automatically build credit lines for blogs or reports.</li>
+    <li><strong>Batch Inputs:</strong> Run multiple album links sequentially to build organized, labeled archives.</li>
+</ul>
+
+<h3>🔎 Quality, Formats, and Color</h3>
+
+<p>
+    Flickr stores multiple sizes per photo; availability depends on uploader settings. When the original is accessible,
+    the downloader prioritizes it. Otherwise, it falls back through the largest public sizes (e.g., 6K, 4K, 3K).
+    Images are saved in their native format (commonly JPEG/PNG). If a downloaded image contains alpha/transparency,
+    the tool can flatten to a white background for maximum compatibility with editors or print workflows.
+</p>
+
+<h3>🧰 Troubleshooting & FAQs</h3>
+
+<div itemscope itemtype="https://schema.org/FAQPage">
+    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <h4 itemprop="name">❓ The album has hundreds of photos. Will the tool stall midway?</h4>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <p itemprop="text">
+                It’s built for long runs. If a network hiccup occurs, the retry logic kicks in. Already saved photos
+                won’t be re-downloaded, so you can rerun safely to complete any missing items.
+            </p>
+        </div>
+    </div>
+
+    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <h4 itemprop="name">❓ Can I choose a specific max quality like 4K only?</h4>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <p itemprop="text">
+                Yes. You can cap the resolution tier to control file size and storage while maintaining excellent visual fidelity.
+            </p>
+        </div>
+    </div>
+
+    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <h4 itemprop="name">❓ Does it work with private photos or restricted originals?</h4>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <p itemprop="text">
+                No. The downloader accesses only what is publicly available to your browser. If the uploader restricts original size,
+                the tool will fetch the largest public variant instead.
+            </p>
+        </div>
+    </div>
+
+    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <h4 itemprop="name">❓ Will my filenames be readable and consistent?</h4>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <p itemprop="text">
+                Yes. By default the tool uses clean, readable filenames. You can add <code>{index}</code> or <code>{photo_id}</code>
+                to keep massive sets orderly and unique.
+            </p>
+        </div>
+    </div>
+
+    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <h4 itemprop="name">❓ Can I export metadata for cataloging and credits?</h4>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <p itemprop="text">
+                Absolutely. Enable CSV export to capture titles, descriptions, tags, dates, authors, and source URLs for each saved photo.
+            </p>
+        </div>
+    </div>
+
+    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <h4 itemprop="name">❓ Does the app alter my photos (compression, color, or EXIF)?</h4>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <p itemprop="text">
+                No artificial compression is added. The tool saves the exact file served by Flickr for that size tier.
+                EXIF preservation depends on what Flickr serves for the chosen size variant.
+            </p>
+        </div>
+    </div>
+</div>
+
+<h3>🧪 Example Workflow (From Album to Organized Archive)</h3>
+
+<ol>
+    <li>Open the album on Flickr and copy its URL.</li>
+    <li>Paste the URL into the downloader and pick “Original” (or 6K/4K if you prefer).</li>
+    <li>Set filename template to <code>{index}_{title}_{photo_id}</code> for strong uniqueness.</li>
+    <li>Enable CSV export to track tags and authors for future credits.</li>
+    <li>Start the download and let the tool run. If the network blips, simply rerun — completed files are skipped.</li>
+    <li>Result: a neat folder containing ultra-HD images plus a CSV catalog for your records.</li>
+</ol>
+
+<h3>🧯 Antivirus Notes</h3>
+<p><strong style="color:red;">
+    Some antivirus tools may flag lesser-known utilities as false positives. If that happens, temporarily allow the app,
+    run your downloads, and then restore your antivirus to normal protection levels.
+</strong></p>
+
+<h3>🖥️ System Requirements</h3>
+<ul>
+    <li>✔️ Windows 10/11 (64-bit)</li>
+    <li>✔️ Internet connection</li>
+    <li>✔️ Sufficient disk space for large originals (4K/6K can be big)</li>
+</ul>
+
+<h3>📥 Download & Get Started</h3>
+<p>
+    Ready to build your high-resolution image library? Paste a link and let
+    <strong>Flickr HD Photos Downloader</strong> do the heavy lifting — no compromises on quality.
+</p>
+
+<p>
+    <a href="https://www.mediafire.com/file/u9d27o8sjaxfcbc/Flickr_HD_Photos_Downloader.zip/file" class="btn-x12yz">Download Flickr HD Photos Downloader</a>
+</p>
+
+<h3>🎥 Watch the Demo</h3>
+<div class="youtube-embed-wrapper">
+    <div class="youtube-embed">
+        <!-- Replace with your actual video URL -->
+        <iframe 
+            src="https://www.youtube.com/embed/1CEqXaTzQPg"
+            title="Flickr HD Photos Downloader Demo | Save Albums in 4K/6K"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+        </iframe>
+    </div>
+</div>
+
+<h3>🔐 Respect for Usage & Rights</h3>
+<p>
+    Always respect license terms and creator rights. Download only what you are permitted to save and use,
+    and credit creators as required by the license attached to each photo. This tool is intended to simplify your
+    own workflow — make sure your use aligns with Flickr’s Terms of Service and the photo owner’s license.
+</p>
+
+<h3>📚 Use Cases & Ideas</h3>
+<ul>
+    <li><strong>Photography Students:</strong> Build a reference catalog of styles and lighting setups in high resolution.</li>
+    <li><strong>Design Studios:</strong> Maintain a large, categorized inspiration archive synced with project folders.</li>
+    <li><strong>Bloggers/Editors:</strong> Rapidly evaluate image candidates at full quality before reaching out for permission.</li>
+    <li><strong>Archivists/Libraries:</strong> Preserve high-value collections with metadata for long-term access.</li>
+    <li><strong>Researchers:</strong> Analyze visual datasets without compression artifacts skewing results.</li>
+</ul>
+
+<h3>🧭 Best Practices for Massive Collections</h3>
+<ul>
+    <li><strong>Plan Storage:</strong> Originals and 6K images are sizable — consider a dedicated drive.</li>
+    <li><strong>Folder Strategy:</strong> Use per-album subfolders to keep projects clean and portable.</li>
+    <li><strong>Checksums or IDs:</strong> Keep <code>{photo_id}</code> in filenames for deduping across collections.</li>
+    <li><strong>Document Sources:</strong> Export CSV; it’s invaluable for tracing attributions later.</li>
+    <li><strong>Regular Backups:</strong> Mirror to an external drive or NAS after major pulls.</li>
+</ul>
+
+<h3>📣 Final Word</h3>
+<p>
+    <strong>Flickr HD Photos Downloader</strong> is built to be the dependable, repeatable step in your image-collection pipeline.
+    Paste links, pick your quality, and receive ultra-HD results you can trust — without getting stuck in low-res rips,
+    browser quirks, or broken scripts. For anyone serious about visual quality, this tool becomes a quiet essential.
+</p>

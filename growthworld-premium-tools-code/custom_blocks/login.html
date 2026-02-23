@@ -1,0 +1,402 @@
+<style>
+.custom-auth-container {
+    max-width: 480px; /* Increased width for better spacing */
+    width: 90%; /* Ensure responsiveness */
+    margin: 0 auto; /* Center the container */
+    padding: 25px;
+    font-family: Arial, sans-serif;
+    background: #ffffff; /* Optional: Adds a clean background */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    border-radius: 8px;
+}
+
+/* Center the auth content */
+.auth-wrapper {
+    text-align: center;
+}
+
+/* Toggle buttons for switching forms */
+.auth-toggle {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.toggle-button {
+    flex: 1;
+    padding: 14px; /* Slightly increased padding for better UX */
+    border: none;
+    background: #f0f0f0;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+    border-radius: 5px;
+}
+
+.toggle-button.active {
+    background: #007bff;
+    color: white;
+    font-weight: bold;
+}
+
+.toggle-button:not(.active):hover {
+    background: #dce3f1;
+}
+
+/* Form styling */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.auth-form h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Labels styling */
+.auth-form label {
+    font-weight: bold;
+    margin-top: 15px; /* Increased spacing between label and input */
+    font-size: 15px;
+}
+
+/* Input field styling */
+.auth-form input {
+    width: calc(100% - 20px); /* Adjust width dynamically */
+    padding: 12px;
+    margin-top: 6px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 15px;
+    box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Button styling */
+.auth-form button {
+    margin-top: 20px;
+    padding: 14px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 17px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    width: 100%;
+    font-weight: bold;
+}
+
+.auth-form button:hover {
+    background: #0056b3;
+    transform: scale(1.02); /* Slight bounce effect */
+}
+
+/* Status messages */
+.status-message {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+    color: red;
+    width: 100%;
+    display: block;
+}
+
+/* Responsive Fixes */
+@media (max-width: 600px) {
+    .custom-auth-container {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .auth-form input {
+        width: 100%; /* Full width on small screens */
+    }
+}
+
+
+</style>
+
+
+<div class="custom-auth-container">
+    <div class="auth-wrapper">
+        <div class="auth-toggle">
+            <button id="show-login" class="toggle-button active" onclick="toggleForms(event, 'login')" disabled>Login</button>
+            <button id="show-signup" class="toggle-button" onclick="toggleForms(event, 'signup')">Sign Up</button>
+        </div>
+
+        <!-- Login Form -->
+        <form id="login-form" class="auth-form" onsubmit="return auth(this, 'login');">
+            <h2>Welcome Back!</h2>
+            <label for="login-email">Email Address:</label>
+            <input type="email" id="login-email" name="email" placeholder="Enter your email" maxlength="100" required aria-label="Email for login">
+            
+            <label for="login-password">Password:</label>
+            <input type="password" id="login-password" name="password" placeholder="Enter your password" required aria-label="Password for login">
+            
+            <button id="login-btn" type="submit">Login</button>
+			<p style="text-align:center;"><a href="#" id="show-forget" onclick="toggleForms(event, 'forget')">Forgot Password</a></p>
+        </form>
+
+        <!-- Signup Form -->
+        <form id="signup-form" class="auth-form" style="display: none;" onsubmit="return auth(this, 'signup');">
+            <h2>Create Your Account</h2>
+            <label for="signup-email">Email Address:</label>
+            <input type="email" id="signup-email" name="email" placeholder="Enter your email" maxlength="100" required aria-label="Email for signup">
+            
+            <label for="signup-password">Password:</label>
+            <input type="password" id="signup-password" name="password" placeholder="Enter your password" maxlength="20" minlength="8" required aria-label="Password for signup">
+            
+            <label for="signup-confirm-password">Confirm Password:</label>
+            <input type="password" id="signup-confirm-password" name="confirm-password" placeholder="Confirm your password" maxlength="20" minlength="8" required aria-label="Confirm password">
+            
+            <button id="signup-btn" type="submit">Sign Up</button>
+        </form>
+		<form id="forget-form" class="auth-form" style="display: none;" onsubmit="return forgetPassword(this);">
+		  <h2>Reset Your Password</h2>
+		  <label for="forget-email">Email Address:</label>
+		  <input type="email" id="forget-email" name="email" placeholder="Enter your registered email" maxlength="100" required aria-label="Email for reset">
+		  <button id="forget-btn" type="submit">Send Reset Link</button>
+		</form>
+        <p id="status" class="status-message" style="text-align:center">{{custom_block_verify}}</p>
+    </div>
+</div>
+
+<script>
+async function auth(form, actionType) {
+    event.preventDefault(); // Prevent form submission
+
+    const btn = document.getElementById(actionType === 'signup' ? 'signup-btn' : 'login-btn');
+    const originalText = btn.innerHTML;
+
+    // Replace button text with spinner
+    btn.innerHTML = `<span class="btn-spinner"></span> Processing...`;
+    btn.disabled = true;
+
+    try {
+        const emailFieldId = actionType === 'signup' ? 'signup-email' : 'login-email';
+        const passwordFieldId = actionType === 'signup' ? 'signup-password' : 'login-password';
+        const confirmPasswordFieldId = actionType === 'signup' ? 'signup-confirm-password' : null;
+
+        const email = form.querySelector(`input[id="${emailFieldId}"]`).value.toUpperCase();
+        const password = form.querySelector(`input[id="${passwordFieldId}"]`).value;
+        const confirmPassword = confirmPasswordFieldId
+            ? form.querySelector(`input[id="${confirmPasswordFieldId}"]`).value
+            : null;
+
+        if (/[\r\t\n\s]/.test(email)) {
+            throw new Error('Email contains whitespace characters.');
+        }
+
+        if (/[\r\t\n\s]/.test(password) || password !== password.trim()) {
+            throw new Error('Password contains leading or trailing whitespace.');
+        }
+
+        if (actionType === 'signup' && (confirmPassword !== password || /[\r\t\n\s]/.test(confirmPassword))) {
+            throw new Error('Passwords do not match or contain whitespace.');
+        }
+
+        const requestBody = { email, password };
+        if (actionType === 'signup') {
+            requestBody.confirm_password = confirmPassword;
+        }
+
+        const endpoint = actionType === 'signup'
+            ? '/growthworld-premium-tools/signup'
+            : '/growthworld-premium-tools/login';
+
+        const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(requestBody),
+        });
+
+        const data = await response.json();
+
+        if (data.status === 'failed') {
+            showPopup(data.message, 'error');
+        } else if (data.status === 'success') {
+            showPopup(data.message, 'info');
+            form.reset();
+            form.outerHTML = "";
+            if (actionType === 'login') {
+                setTimeout(() => {
+                    window.location.href = '/growthworld-premium-tools/dashboard';
+                }, 1000);
+            }
+        } else {
+            showPopup('Unexpected server response. Please try again.', 'error');
+        }
+
+    } catch (error) {
+        console.log(error.message);
+        showPopup('An error occurred. Please try again.', 'error');
+    } finally {
+        // Restore button and enable
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+    }
+
+    return false;
+}
+
+async function forgetPassword(form) {
+  event.preventDefault();
+
+  const btn = document.getElementById('forget-btn');
+  const originalText = btn.innerHTML;
+
+  btn.innerHTML = '<span class="btn-spinner"></span> Sending...';
+  btn.disabled = true;
+
+  try {
+    const email = form.querySelector('#forget-email').value.toUpperCase();
+
+    if (/[\r\t\n\s]/.test(email)) {
+      throw new Error('Email contains whitespace characters.');
+    }
+
+    const response = await fetch('/growthworld-premium-tools/forget-password', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email })
+    });
+
+    const data = await response.json();
+
+    if (data.status === 'success') {
+      showPopup(data.message, 'info');
+      form.reset();
+      form.outerHTML = '';
+    } else {
+      showPopup(data.message || 'Something went wrong. Please try again.', 'error');
+    }
+
+  } catch (error) {
+      console.log(error.message);
+    showPopup('An error occurred. Please try again.', 'error');
+  } finally {
+    btn.innerHTML = originalText;
+    btn.disabled = false;
+  }
+
+  return false;
+}
+
+function addPopupStyles() {
+	if (!document.querySelector('#popup-styles')) {
+		const style = document.createElement('style');
+		style.id = 'popup-styles';
+		style.textContent = `
+			.popup-container {
+				position: fixed;
+				top: 10px;
+				left: 10px;
+				z-index: 9999;
+				display: flex;
+				flex-direction: column;
+				gap: 10px;
+			}
+
+			.popup {
+				min-width: 200px;
+				padding: 10px 15px;
+				border-radius: 5px;
+				color: white;
+				font-family: Arial, sans-serif;
+				font-size: 14px;
+				box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+				animation: fadeInOut 5s ease-in-out forwards;
+			}
+
+			.popup.info {
+				background-color: green;
+			}
+
+			.popup.error {
+				background-color: red;
+			}
+
+			@keyframes fadeInOut {
+				0% {
+					opacity: 0;
+					transform: translateY(-10px);
+				}
+				10%, 90% {
+					opacity: 1;
+					transform: translateY(0);
+				}
+				100% {
+					opacity: 0;
+					transform: translateY(-10px);
+				}
+			}
+		`;
+		document.head.appendChild(style);
+	}
+}
+
+// Function to show a popup
+function showPopup(message, type) {
+	// Add styles dynamically
+	addPopupStyles();
+
+	// Create popup container if it doesn't exist
+	if (!document.querySelector('.popup-container')) {
+		const container = document.createElement('div');
+		container.className = 'popup-container';
+		document.body.appendChild(container);
+	}
+
+	// Create a popup element
+	const popup = document.createElement('div');
+	popup.className = `popup ${type}`;
+	popup.textContent = message;
+
+	// Append popup to the container
+	const container = document.querySelector('.popup-container');
+	container.appendChild(popup);
+	document.getElementById('status').innerHTML = message;
+	document.getElementById('status').style.color = type === 'info' ? 'blue' : 'red';
+ 	// Remove popup after 5 seconds
+	setTimeout(() => {
+		popup.remove();
+	}, 5000);
+}
+
+function toggleForms(e, formType) {
+	e.preventDefault();
+    const loginForm = document.getElementById('login-form');
+    const signupForm = document.getElementById('signup-form');
+	const forgetForm = document.getElementById('forget-form');
+
+    const loginButton = document.getElementById('show-login');
+    const signupButton = document.getElementById('show-signup');
+	const forgetButton = document.getElementById('show-forget');
+
+    // Show/Hide forms based on selection
+    loginForm.style.display = formType === 'login' ? 'block' : 'none';
+    signupForm.style.display = formType === 'signup' ? 'block' : 'none';
+	forgetForm.style.display = formType === 'forget' ? 'block' : 'none';
+	
+    // Update button states
+    loginButton.disabled = formType === 'login';
+    signupButton.disabled = formType === 'signup';
+	forgetButton.disabled = formType === 'forget';
+	 
+    // Remove active class from both buttons
+    loginButton.classList.remove('active');
+    signupButton.classList.remove('active');
+	forgetButton.classList.remove('active');
+	
+    // Add active class to the selected button
+    if (formType === 'login') loginButton.classList.add('active');
+    else if (formType === 'signup') signupButton.classList.add('active');
+    else forgetButton.classList.add('active');
+}
+
+</script>

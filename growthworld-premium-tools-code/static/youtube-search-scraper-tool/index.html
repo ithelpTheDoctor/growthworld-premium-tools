@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/growthworld-premium-tools/static/images/logo.webp">
+  <link rel="icon" type="image/png" sizes="16x16" href="/growthworld-premium-tools/static/images/logo.webp">
+  <link rel="icon" type="image/x-icon" href="/growthworld-premium-tools/static/images/logo.ico">
+  <!-- Apple Touch Icon (for iOS devices) -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/growthworld-premium-tools/static/images/logo.webp">
+  <!-- Android & Windows Tile Icon -->
+  <meta name="msapplication-TileImage" content="/growthworld-premium-tools/static/images/logo.webp">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <!-- Essential Meta Tags -->
+<title>Bulk YouTube Search Scraper | Extract Video & Playlist Data Instantly</title>
+<meta name="description" content="Scrape YouTube search results in bulk using keywords. Extract videos, playlists, views, durations, channel info and export everything to Excel with GrowthWorld’s YouTube Search Scraper." />
+<meta name="keywords" content="youtube search scraper, bulk youtube scraper, youtube playlist extractor, youtube video metadata tool, scrape youtube search results, export youtube to excel, GrowthWorld youtube tool" />
+<meta name="author" content="GrowthWorld.net" />
+<meta name="robots" content="index, follow" />
+
+<!-- Open Graph Meta Tags (for Facebook & LinkedIn) -->
+<meta property="og:title" content="YouTube Search Scraper | Bulk Keyword Video & Playlist Extractor" />
+<meta property="og:description" content="Extract video and playlist data from YouTube searches using bulk keywords. No API key needed. Save all results to Excel instantly with GrowthWorld’s YouTube Search Scraper." />
+<meta property="og:url" content="https://growthworld.net/growthworld-premium-tools/youtube-search-scraper-tool" />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="https://growthworld.net/static/images/youtube-search-scraper-preview.png" />
+
+<!-- Twitter Card Meta Tags -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="YouTube Search Scraper | Bulk Video & Playlist Data to Excel" />
+<meta name="twitter:description" content="Bulk scrape YouTube search results using .txt or manual keywords. Export detailed video & playlist data to Excel with one click." />
+<meta name="twitter:image" content="https://growthworld.net/static/images/youtube-search-scraper-preview.png" />
+
+<!-- Canonical URL (Prevents Duplicate Content Issues) -->
+<link rel="canonical" href="https://growthworld.net/growthworld-premium-tools/youtube-search-scraper-tool" />
+
+<!-- JSON-LD Structured Data (Schema Markup for SEO) -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "YouTube Search Scraper",
+    "description": "Bulk scrape YouTube search results by keyword. Export video and playlist data such as title, URL, views, duration, and channel info to Excel.",
+    "operatingSystem": "Windows",
+    "applicationCategory": "Utility",
+    "browserRequirements": "None",
+    "offers": {
+        "@type": "Offer",
+        "priceCurrency": "USD",
+        "price": "10",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+            "@type": "Organization",
+            "name": "GrowthWorld.net",
+            "url": "https://growthworld.net"
+        }
+    },
+    "url": "https://growthworld.net/growthworld-premium-tools/youtube-search-scraper-tool",
+    "image": "https://growthworld.net/static/images/youtube-search-scraper-preview.png",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://growthworld.net/growthworld-premium-tools/youtube-search-scraper-tool"
+    }
+}
+</script>
+
+
+  <script> window.debug = true; </script>
+
+  <!-- Consolidated CSS -->
+  <style>
+   /* ---------------------------------------------------
+   1) Base Reset & Fonts
+--------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f0f0f0;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------------------------------------------------
+   2) Links & Buttons
+--------------------------------------------------- */
+a {
+  text-decoration: none !important;
+}
+
+/* Example gradient button */
+.btn-x12yz {
+  display: inline-block;
+  background: linear-gradient(135deg, #007bff, #00d4ff);
+  border: none;
+  color: white  !important;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0px 4px 8px rgba(0, 123, 255, 0.3);
+  outline: none;
+}
+.btn-x12yz:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 6px 12px rgba(0, 123, 255, 0.5);
+}
+.btn-x12yz:active {
+  transform: scale(0.98);
+}
+
+/* ---------------------------------------------------
+   3) Header
+--------------------------------------------------- */
+.custom-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  background: #007bff;
+  color: white;
+  font-family: Arial, sans-serif;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.brand-logo {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 8px 12px;
+  transition: color 0.3s ease;
+}
+
+.nav-item {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  padding: 8px 12px;
+  transition: background 0.3s ease;
+}
+
+/* ---------------------------------------------------
+   4) Layout Container
+--------------------------------------------------- */
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  flex: 1; /* allows main area to grow & push footer down */
+  padding: 20px;
+}
+
+/* ---------------------------------------------------
+   5) Sidebar
+--------------------------------------------------- */
+aside#sidebar {
+  width: 250px;
+  min-width: 250px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+
+aside#sidebar h2 {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+aside#sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+aside#sidebar ul li {
+  padding: 14px;
+  background-color: #f9f9f9;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  border: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+aside#sidebar ul li:hover {
+  background-color: #e9f5ff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  transform: scale(1.02);
+}
+aside#sidebar ul li a {
+  text-decoration: none;
+  font-size: 16px;
+  color: #007bff;
+  font-weight: bold;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+aside#sidebar ul li a:hover {
+  color: #0056b3;
+  transform: translateX(3px);
+}
+
+/* Sidebar search box */
+#searchTool {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+/* Hamburger icon for mobile */
+#hamburger {
+  display: none;
+  color: white;
+  cursor: pointer;
+  font-size: 24px;
+  padding: 10px;
+  border: 3px solid;
+  border-radius: 5px;
+  z-index: 1100; /* higher than sidebar */
+}
+
+/* ---------------------------------------------------
+   6) Main Content
+--------------------------------------------------- */
+main {
+  flex: 1;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  /* no margin here; it’s handled by .main-content inside */
+}
+
+.main-content {
+  /* On very small screens, use full width with minimal side padding */
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+
+  /* Once we have more space (e.g. tablets+), center the content up to a max width */
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .main-content {
+    max-width: 80; /* you can adjust to preference */
+  }
+}
+
+/* Text-based elements */
+.main-content h1,
+.main-content h2,
+.main-content h3,
+.main-content h4,
+.main-content h5,
+.main-content h6,
+.main-content p,
+.main-content span,
+.main-content ul,
+.main-content ol,
+.main-content li {
+  width: 100%;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+/* Images fit the container properly */
+.main-content img {
+  display: block;
+  margin: 15px auto;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 5px;
+}
+
+/* Iframes and videos scale fully on smaller screens */
+.main-content iframe,
+.main-content video {
+  display: block;
+  margin: 15px auto;
+  width: 100%;
+  max-width: 960px;
+  height: auto;
+  /* Removed min-width so they won't overflow on tiny screens */
+  /* aspect-ratio: 16/9 is optional; remove or keep if you like */
+}
+
+/* Links in main content */
+.main-content a {
+  color: blue;
+  text-decoration: none !important;
+  font-weight: bold;
+  transition: color 0.3s ease-in-out;
+}
+.main-content a:hover {
+  color: #00bcd4;
+  text-decoration: underline;
+}
+
+/* Lists */
+.main-content ul,
+.main-content ol {
+  padding-left: 20px;
+}
+.main-content li {
+  margin-bottom: 5px;
+}
+
+/* Form groups (if used) */
+.main-content .form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 15px;
+  width: max-content;
+  min-width: 150px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.main-content label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.main-content input,
+.main-content textarea,
+.main-content select {
+  display: block;
+  min-width: calc(100% + 20px);
+  max-width: 300px;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: min-width 0.2s ease-in-out;
+}
+.main-content textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+@media (max-width: 768px) {
+  .main-content .form-group {
+    width: 100%;
+  }
+  .main-content input,
+  .main-content textarea,
+  .main-content select {
+    min-width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* Example fluid heading that won't become huge on phones */
+.responsive-h1 {
+  font-size: 6vw; /* smaller than 1:1 so it doesn't get huge on tiny screens */
+  line-height: 1.2;
+  margin: 0.5em 0;
+}
+@media (min-width: 600px) {
+  .responsive-h1 {
+    font-size: 5vw;
+  }
+}
+@media (min-width: 768px) {
+  .responsive-h1 {
+    font-size: 4vw;
+  }
+}
+@media (min-width: 1024px) {
+  .responsive-h1 {
+    font-size: 3rem; 
+  }
+}
+
+/* ---------------------------------------------------
+   7) Sidebar Toggle for Mobile
+--------------------------------------------------- */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    padding: 10px;
+  }
+  aside#sidebar {
+    width: 100%;
+    display: none;
+    position: relative;
+    z-index: 1000;
+    background: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  aside#sidebar.show {
+    display: block;
+  }
+  main {
+    width: 100%;
+  }
+  #hamburger {
+    display: block;
+  }
+}
+
+/* ---------------------------------------------------
+   8) Share Sidebar
+--------------------------------------------------- */
+#shareSidebar {
+  position: fixed;
+  top: 20%;
+  right: 0;
+  z-index: 9999;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 0 5px 5px 0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  display: block;
+}
+
+.share-buttons {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.share-buttons li {
+  margin: 10px 0;
+}
+
+.share-buttons li svg {
+  width: 32px;
+  height: 32px;
+}
+
+@media (max-width: 768px) {
+  #shareSidebar {
+    right: 0;
+    padding: 5px;
+  }
+  .share-buttons li svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* ---------------------------------------------------
+   9) Footer
+--------------------------------------------------- */
+.custom-footer {
+  background: #007bff;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  margin-top: auto; /* forces footer to the bottom if content is short */
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-links {
+  margin-top: 10px;
+  display: flex;
+  gap: 15px;
+}
+
+.footer-item {
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+  padding: 5px 10px;
+  transition: color 0.3s ease, background 0.3s ease;
+  border-radius: 5px;
+}
+.footer-item:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #e3f2fd;
+}
+
+  </style>
+</head>
+
+<body>
+  <header class="custom-header">
+    <div id="hamburger" onclick="toggleSidebar()">&#9776;</div>
+    <nav class="nav-links">
+      <a href="/growthworld-premium-tools" class="brand-logo">GrowthWorld Premium Tools HUB</a>
+      <a href="about-us" class="nav-item">About Us</a>
+      <a href="contact" class="nav-item">Contact</a>
+      {{custom_block_logout}}
+    </nav>
+  </header>
+
+  <div class="container">
+    <!-- Sidebar for tools list -->
+    <aside id="sidebar">
+      <h2>Tool Page</h2>
+      {{custom_block_returndashboard}}
+      <a href="/growthworld-premium-tools/login" class="btn-x12yz">Get Access Now</a></br></br>
+      {{custom_block_subscription_link}}
+      {{custom_block_credit_link}}
+      <input type="text" id="searchTool" placeholder="Search option...">
+      <ul id="toolList">
+        <li class="open-tool"><a href="/growthworld-premium-tools/subscription-tools">Checkout Subscription Tools</a></li>
+        <li class="open-tool"><a href="/growthworld-premium-tools/credit-tools">Checkout Credit Tools</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main content area for tool display -->
+    <main>
+      <div class="main-content" id="mainContent">
+        {{custom_block_balance}}
+        <style>
+.youtube-embed-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+}
+
+.youtube-embed {
+    width: 100%;
+    max-width: 560px;
+    aspect-ratio: 16 / 9;
+    background: #000;
+}
+
+.youtube-embed iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+</style>
+
+<h1>Scrape YouTube Search Results – GrowthWorld.net Tools</h1>
+
+<h2>Fast, Customizable, and Bulk Keyword-Powered YouTube Scraper</h2>
+
+<p>
+	<strong>YouTube Search Scraper</strong> is a powerful desktop tool for anyone who wants to collect large volumes of video and playlist data directly from YouTube search results. Perfect for researchers, marketers, media curators, and growth hackers.
+</p>
+
+<p>
+	With support for bulk keyword input and full control over filters, this tool extracts vital data points such as video titles, URLs, views, durations, thumbnails, and channel information—all saved neatly into an Excel file.
+</p>
+
+<h3>🚀 Why Use YouTube Search Scraper?</h3>
+<ul>
+	<li>✅ Extract Videos and Playlists Directly from YouTube Search</li>
+	<li>✅ Supports Bulk Keyword Input (Direct Entry or .txt File)</li>
+	<li>✅ Control Output Limit for Each Keyword</li>
+	<li>✅ Auto-Saves Clean Excel File with Timestamp</li>
+	<li>✅ Ideal for Research, Trend Analysis, and Lead Generation</li>
+</ul>
+
+<h3>🎯 Key Features & Controls</h3>
+<ul>
+	<li>📂 Import Keywords – Paste directly or upload a <code>.txt</code> file with one keyword per line</li>
+	<li>🎛️ Filter Results – Choose between Videos, Playlists, or both</li>
+	<li>📉 Set Max Limit – Specify how many results to fetch per keyword</li>
+	<li>📤 Export to Excel – Output saved as <code>Youtube_Results_YYYY-MM-DD HH-MM-SS.xlsx</code></li>
+</ul>
+
+<h3>📊 Data Points Extracted</h3>
+
+<h4>For Videos:</h4>
+<ul>
+	<li>🔹 Keyword</li>
+	<li>🔹 Title</li>
+	<li>🔹 Type (Regular, Short, Live)</li>
+	<li>🔹 Video URL</li>
+	<li>🔹 Views</li>
+	<li>🔹 Duration</li>
+	<li>🔹 Duration (Seconds)</li>
+	<li>🔹 Description Excerpt</li>
+	<li>🔹 Upload Date</li>
+	<li>🔹 Thumbnail Image</li>
+	<li>🔹 Channel Name</li>
+	<li>🔹 Channel URL</li>
+	<li>🔹 Channel Profile Image</li>
+</ul>
+
+<h4>For Playlists:</h4>
+<ul>
+	<li>🔸 Keyword</li>
+	<li>🔸 Playlist Name</li>
+	<li>🔸 Playlist Link</li>
+	<li>🔸 Playlist Thumbnail</li>
+	<li>🔸 Number of Videos</li>
+	<li>🔸 Channel Name</li>
+</ul>
+
+<h3>🛠️ How It Works (Step-by-Step)</h3>
+<ol>
+	<li>📝 Enter keywords manually or upload a <code>.txt</code> file</li>
+	<li>⚙️ Select filters for result type and max result limit</li>
+	<li>▶️ Click “Start Scraping” and let the tool collect data</li>
+	<li>📦 Wait for the file <code>Youtube_Results_YYYY-MM-DD HH-MM-SS.xlsx</code> to be generated</li>
+	<li>📥 Download and use your data for analysis or campaigns</li>
+</ol>
+
+<h3>💡 Who Needs This Tool?</h3>
+<ul>
+	<li>💼 Business Analysts – Mine YouTube content for trends and outreach</li>
+	<li>📊 SEO Professionals – Analyze keyword visibility and video competition</li>
+	<li>🎬 Video Editors – Find fresh content ideas from real search results</li>
+	<li>🎓 Academics & Students – Study YouTube content types and sources</li>
+	<li>🧠 Content Strategists – Research what type of content performs in any niche</li>
+</ul>
+
+<h3>🛠️ How to Use</h3>
+<ol>
+	<li>📥 <strong>Download the tool</strong> from <a href="https://www.mediafire.com/file/YOUR_FILE_ID/YoutubeSearchScraper.zip/file">this link</a>.</li>
+	<li>📂 <strong>Extract the executable</strong> into a new folder.</li>
+	<li>🖥️ <strong>Run the tool</strong> by double-clicking the executable.</li>
+	<li>🔑 <strong>Log in</strong> using the same credentials as your GrowthWorld website account.</li>
+	<li>🎯 <strong>Start scraping</strong> video and playlist data with powerful bulk input.</li>
+</ol>
+
+<h3>🎥 Watch Demo Video</h3>
+<div class="youtube-embed-wrapper">
+    <div class="youtube-embed">
+        <iframe 
+            src="https://www.youtube.com/embed/YOUR_DEMO_VIDEO_ID" 
+            title="YouTube Search Scraper - Demo & Tutorial" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+        </iframe>
+    </div>
+</div>
+
+<h3>💲 Pricing & Subscription</h3>
+<p>
+	Access this tool with the <strong>GrowthWorld Premium Tools Subscription</strong> — just $10/month unlocks unlimited scraping along with our full productivity suite.
+</p>
+
+<h3>📢 Frequently Asked Questions (FAQs)</h3>
+<div itemscope itemtype="https://schema.org/FAQPage">
+	<div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+		<h4 itemprop="name">❓ Can I input multiple keywords at once?</h4>
+		<div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+			<p itemprop="text">
+				Yes. You can paste multiple keywords or upload a .txt file. Each keyword will be processed individually.
+			</p>
+		</div>
+	</div>
+	
+	<div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+		<h4 itemprop="name">❓ Does this tool require browser login or API key?</h4>
+		<div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+			<p itemprop="text">
+				No. It scrapes public search results from YouTube without needing API keys or logins.
+			</p>
+		</div>
+	</div>
+
+	<div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+		<h4 itemprop="name">❓ What happens if YouTube search fails mid-way?</h4>
+		<div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+			<p itemprop="text">
+				Partial results will still be saved. You can re-run for failed keywords, and the tool caches processed entries.
+			</p>
+		</div>
+	</div>
+</div>
+
+<h3>🚀 Get Started Now!</h3>
+<p>
+	Stop doing manual YouTube searches and copying data one-by-one. 
+	<a href="https://growthworld.net/growthworld-premium-tools/subscribe" class="btn-x12yz">Subscribe Now</a> 
+	and dominate YouTube data with the power of bulk scraping.
+</p>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Floating share sidebar -->
+  <div id="shareSidebar" style="display:block;">
+    <ul class="share-buttons">
+      <li><a id="facebook-share" href="#" title="Share on Facebook" target="_blank">
+        <!-- Facebook SVG -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#3b5998" d="M22.675 0H1.325C.594 0 0 .593 0 1.324v21.351C0 23.406.594 24 1.325 24H12.82V14.706H9.692v-3.68h3.128V8.413c0-3.097 1.894-4.788 4.662-4.788 1.325 0 2.463.098 2.795.142v3.24h-1.918c-1.504 0-1.796.715-1.796 1.762v2.308h3.588l-.467 3.68h-3.12V24h6.116C23.406 24 24 23.406 24 22.675V1.325C24 .594 23.406 0 22.675 0z"/></svg>
+      </a></li>
+      <li><a id="twitter-share" href="#" title="Tweet" target="_blank">
+        <!-- Twitter SVG -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#1DA1F2" d="M23.954 4.569c-.885.391-1.83.656-2.825.775 1.014-.609 1.794-1.574 2.163-2.723-.949.555-2.003.959-3.127 1.184-.897-.957-2.178-1.555-3.594-1.555-2.719 0-4.924 2.205-4.924 4.924 0 .385.045.761.127 1.122C7.691 8.094 4.067 6.13 1.64 3.161c-.422.722-.664 1.561-.664 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.386 1.693 4.374 3.946 4.827-.412.111-.849.171-1.296.171-.317 0-.626-.03-.928-.085.631 1.953 2.445 3.376 4.6 3.416-1.68 1.318-3.809 2.102-6.114 2.102-.397 0-.79-.023-1.175-.067 2.179 1.396 4.768 2.211 7.548 2.211 9.054 0 14.004-7.497 14.004-13.986 0-.213 0-.426-.015-.637.961-.694 1.8-1.562 2.46-2.549l-.047-.02z"/></svg>
+      </a></li>
+      <li><a id="linkedin-share" href="#" title="Share on LinkedIn" target="_blank">
+        <!-- LinkedIn SVG -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#0077B5" d="M22.23 0H1.77C.79 0 0 .774 0 1.729v20.543C0 23.225.79 24 1.77 24h20.46C23.21 24 24 23.225 24 22.272V1.729C24 .774 23.21 0 22.23 0zM7.12 20.452H3.56V9H7.12v11.452zM5.34 7.648c-1.148 0-1.872-.786-1.872-1.764 0-.988.742-1.763 1.91-1.763 1.17 0 1.872.775 1.882 1.763 0 .978-.712 1.764-1.92 1.764zm13.872 12.804h-3.556v-6.23c0-1.565-.557-2.633-1.954-2.633-1.064 0-1.698.711-1.978 1.396-.102.243-.127.58-.127.92v6.547h-3.556s.046-10.633 0-11.452h3.556v1.623c.472-.729 1.32-1.77 3.216-1.77 2.35 0 4.108 1.534 4.108 4.831v6.768z"/></svg>
+      </a></li>
+      <li><a id="reddit-share" href="#" title="Submit to Reddit" target="_blank">
+        <!-- Reddit SVG -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#FF4500" d="M24 12c0-6.63-5.373-12-12-12S0 5.37 0 12c0 5.292 3.437 9.8 8.205 11.385-.113-.964-.213-2.443.045-3.492.237-1.015 1.522-6.476 1.522-6.476s-.388-.775-.388-1.922c0-1.8 1.043-3.145 2.348-3.145 1.106 0 1.64.83 1.64 1.826 0 1.115-.71 2.781-1.075 4.33-.302 1.275.635 2.313 1.88 2.313 2.254 0 3.976-2.378 3.976-5.797 0-2.39-1.716-4.078-4.167-4.078-2.841 0-4.508 2.134-4.508 4.343 0 .865.332 1.795.748 2.302.083.1.096.188.07.288-.077.315-.25.999-.283 1.14-.044.18-.144.22-.332.132-1.235-.574-2.008-2.374-2.008-3.833 0-3.108 2.25-5.97 6.487-5.97 3.404 0 6.05 2.427 6.05 5.678 0 3.364-2.122 6.086-5.07 6.086-1.015 0-1.968-.53-2.293-1.158l-.623 2.377c-.225.89-.84 2.004-1.255 2.682.94.283 1.92.44 2.946.44 6.628 0 12-5.37 12-12z"/></svg>
+      </a></li>
+      <li><a id="whatsapp-share" href="#" title="Share on WhatsApp" target="_blank">
+        <!-- WhatsApp SVG -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#25D366" d="M20.52 3.451c-4.293-4.293-11.243-4.293-15.537 0-4.293 4.294-4.293 11.243 0 15.537a10.892 10.892 0 0 0 7.737 3.204c1.356 0 2.685-.264 3.94-.793l3.98 1.062-.64-3.9a10.878 10.878 0 0 0 3.198-7.738 10.885 10.885 0 0 0-3.198-7.737zM12 21.432c-1.247 0-2.47-.243-3.613-.723l-.26-.107-2.362.63.627-2.353-.114-.24c-.678-1.439-.766-3.042-.246-4.58a8.99 8.99 0 0 1 8.479-6.187c2.4 0 4.654.934 6.343 2.624a8.968 8.968 0 0 1 2.625 6.343 8.992 8.992 0 0 1-6.185 8.481c-.86.292-1.764.44-2.667.44z"/></svg>
+      </a></li>
+    </ul>
+  </div>
+
+  <script>
+    // Toggle the sidebar for mobile
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('show');
+    }
+
+    // Open tool link in same tab
+    document.addEventListener('click', function(event) {
+      if (event.target.closest('.open-tool')) {
+        const liElement = event.target.closest('.open-tool');
+        const link = liElement.querySelector('a');
+        if (link && link.href) {
+          window.open(link.href, '_self');
+        }
+      }
+    });
+
+    // Search filter for sidebar
+    document.getElementById('searchTool').addEventListener('keyup', function() {
+      const searchQuery = this.value.toLowerCase();
+      const toolListItems = document.querySelectorAll('#toolList li');
+      toolListItems.forEach(function(item) {
+        const toolName = item.textContent.toLowerCase();
+        item.style.display = toolName.includes(searchQuery) ? '' : 'none';
+      });
+    });
+
+    // Dynamic share links
+    const currentURL = encodeURIComponent(window.location.href);
+    const currentTitle = encodeURIComponent(document.title);
+    document.getElementById('facebook-share').href =
+      `https://www.facebook.com/sharer/sharer.php?u=${currentURL}`;
+    document.getElementById('twitter-share').href =
+      `https://twitter.com/intent/tweet?url=${currentURL}&text=${currentTitle}`;
+    document.getElementById('linkedin-share').href =
+      `https://www.linkedin.com/shareArticle?mini=true&url=${currentURL}&title=${currentTitle}&summary=${currentTitle}`;
+    document.getElementById('reddit-share').href =
+      `https://www.reddit.com/submit?url=${currentURL}&title=${currentTitle}`;
+    document.getElementById('whatsapp-share').href =
+      `https://api.whatsapp.com/send?text=${currentTitle}%20${currentURL}`;
+  </script>
+
+  <footer class="custom-footer">
+    <div class="footer-content">
+      <p>&copy; 2025 GrowthWorld. All rights reserved.</p>
+      <nav class="footer-links">
+        <a href="terms-of-service" class="footer-item">Terms of Service</a>
+        <a href="privacy-policy" class="footer-item">Privacy Policy</a>
+        <a href="contact" class="footer-item">Contact</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

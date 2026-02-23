@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/growthworld-premium-tools/static/images/logo.webp">
+  <link rel="icon" type="image/png" sizes="16x16" href="/growthworld-premium-tools/static/images/logo.webp">
+  <link rel="icon" type="image/x-icon" href="/growthworld-premium-tools/static/images/logo.ico">
+  <!-- Apple Touch Icon (for iOS devices) -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/growthworld-premium-tools/static/images/logo.webp">
+  <!-- Android & Windows Tile Icon -->
+  <meta name="msapplication-TileImage" content="/growthworld-premium-tools/static/images/logo.webp">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <!-- Essential Meta Tags -->
+<title>Flickr HD Photos Downloader | Download Flickr Albums & Photos in 3K, 4K, 6K</title>
+<meta name="description" content="Download Flickr photos and albums in ultra HD (3K, 4K, 6K, or original). Save bulk images from any Flickr link instantly with this easy-to-use tool. Free & safe.">
+<meta name="keywords" content="flickr photo downloader, flickr album downloader, flickr hd photos, flickr 4k downloader, flickr bulk photo download, flickr high resolution downloader, flickr 6k images">
+<meta name="author" content="GrowthWorld.net">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph Meta Tags -->
+<meta property="og:title" content="Flickr HD Photos Downloader | Save 3K, 4K, 6K Photos & Albums" />
+<meta property="og:description" content="Easily download Flickr photos or full albums in highest resolution (3K, 4K, 6K, or original). Supports bulk downloads with one click." />
+<meta property="og:url" content="https://growthworld.net/growthworld-premium-tools/flickr-hd-photos-downloader" />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="https://growthworld.net/growthworld-premium-tools/static/images/flickr-hd-photos-downloader.png" />
+
+<!-- Twitter Card Meta Tags -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Flickr HD Photos Downloader | GrowthWorld.net" />
+<meta name="twitter:description" content="Download Flickr photos & albums in ultra HD (3K, 4K, 6K). Save single or bulk images instantly. Fast, secure, and free to use." />
+<meta name="twitter:image" content="https://growthworld.net/growthworld-premium-tools/static/images/flickr-hd-photos-downloader.png" />
+
+<!-- Canonical URL -->
+<link rel="canonical" href="https://growthworld.net/growthworld-premium-tools/flickr-hd-photos-downloader" />
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Flickr HD Photos Downloader",
+  "description": "Download high resolution Flickr photos and albums in 3K, 4K, 6K, or original quality. Supports bulk download and safe offline storage.",
+  "applicationCategory": "Utility",
+  "operatingSystem": "Windows, Mac, Linux",
+  "softwareVersion": "1.0.0",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock",
+    "seller": {
+      "@type": "Organization",
+      "name": "GrowthWorld.net",
+      "url": "https://growthworld.net"
+    }
+  },
+  "url": "https://growthworld.net/growthworld-premium-tools/flickr-hd-photos-downloader",
+  "image": "https://growthworld.net/growthworld-premium-tools/static/images/flickr-hd-photos-downloader.png",
+  "downloadUrl": "https://growthworld.net/downloads/flickr-hd-photos-downloader.exe",
+  "installUrl": "https://growthworld.net/growthworld-premium-tools/flickr-hd-photos-downloader",
+  "creator": {
+    "@type": "Organization",
+    "name": "GrowthWorld.net"
+  }
+}
+</script>
+
+
+  <script> window.debug = true; </script>
+
+  <!-- Consolidated CSS -->
+  <style>
+   /* ---------------------------------------------------
+   1) Base Reset & Fonts
+--------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f0f0f0;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------------------------------------------------
+   2) Links & Buttons
+--------------------------------------------------- */
+a {
+  text-decoration: none !important;
+}
+
+/* Example gradient button */
+.btn-x12yz {
+  display: inline-block;
+  background: linear-gradient(135deg, #007bff, #00d4ff);
+  border: none;
+  color: white  !important;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0px 4px 8px rgba(0, 123, 255, 0.3);
+  outline: none;
+}
+.btn-x12yz:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 6px 12px rgba(0, 123, 255, 0.5);
+}
+.btn-x12yz:active {
+  transform: scale(0.98);
+}
+
+/* ---------------------------------------------------
+   3) Header
+--------------------------------------------------- */
+.custom-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  background: #007bff;
+  color: white;
+  font-family: Arial, sans-serif;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.brand-logo {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 8px 12px;
+  transition: color 0.3s ease;
+}
+
+.nav-item {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  padding: 8px 12px;
+  transition: background 0.3s ease;
+}
+
+/* ---------------------------------------------------
+   4) Layout Container
+--------------------------------------------------- */
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  flex: 1; /* allows main area to grow & push footer down */
+  padding: 20px;
+}
+
+/* ---------------------------------------------------
+   5) Sidebar
+--------------------------------------------------- */
+aside#sidebar {
+  width: 250px;
+  min-width: 250px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+
+aside#sidebar h2 {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+aside#sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+aside#sidebar ul li {
+  padding: 14px;
+  background-color: #f9f9f9;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  border: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+aside#sidebar ul li:hover {
+  background-color: #e9f5ff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  transform: scale(1.02);
+}
+aside#sidebar ul li a {
+  text-decoration: none;
+  font-size: 16px;
+  color: #007bff;
+  font-weight: bold;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+aside#sidebar ul li a:hover {
+  color: #0056b3;
+  transform: translateX(3px);
+}
+
+/* Sidebar search box */
+#searchTool {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+/* Hamburger icon for mobile */
+#hamburger {
+  display: none;
+  color: white;
+  cursor: pointer;
+  font-size: 24px;
+  padding: 10px;
+  border: 3px solid;
+  border-radius: 5px;
+  z-index: 1100; /* higher than sidebar */
+}
+
+/* ---------------------------------------------------
+   6) Main Content
+--------------------------------------------------- */
+main {
+  flex: 1;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  /* no margin here; it’s handled by .main-content inside */
+}
+
+.main-content {
+  /* On very small screens, use full width with minimal side padding */
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+
+  /* Once we have more space (e.g. tablets+), center the content up to a max width */
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .main-content {
+    max-width: 80; /* you can adjust to preference */
+  }
+}
+
+/* Text-based elements */
+.main-content h1,
+.main-content h2,
+.main-content h3,
+.main-content h4,
+.main-content h5,
+.main-content h6,
+.main-content p,
+.main-content span,
+.main-content ul,
+.main-content ol,
+.main-content li {
+  width: 100%;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+/* Images fit the container properly */
+.main-content img {
+  display: block;
+  margin: 15px auto;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 5px;
+}
+
+/* Iframes and videos scale fully on smaller screens */
+.main-content iframe,
+.main-content video {
+  display: block;
+  margin: 15px auto;
+  width: 100%;
+  max-width: 960px;
+  height: auto;
+  /* Removed min-width so they won't overflow on tiny screens */
+  /* aspect-ratio: 16/9 is optional; remove or keep if you like */
+}
+
+/* Links in main content */
+.main-content a {
+  color: blue;
+  text-decoration: none !important;
+  font-weight: bold;
+  transition: color 0.3s ease-in-out;
+}
+.main-content a:hover {
+  color: #00bcd4;
+  text-decoration: underline;
+}
+
+/* Lists */
+.main-content ul,
+.main-content ol {
+  padding-left: 20px;
+}
+.main-content li {
+  margin-bottom: 5px;
+}
+
+/* Form groups (if used) */
+.main-content .form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 15px;
+  width: max-content;
+  min-width: 150px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.main-content label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.main-content input,
+.main-content textarea,
+.main-content select {
+  display: block;
+  min-width: calc(100% + 20px);
+  max-width: 300px;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: min-width 0.2s ease-in-out;
+}
+.main-content textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+@media (max-width: 768px) {
+  .main-content .form-group {
+    width: 100%;
+  }
+  .main-content input,
+  .main-content textarea,
+  .main-content select {
+    min-width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* Example fluid heading that won't become huge on phones */
+.responsive-h1 {
+  font-size: 6vw; /* smaller than 1:1 so it doesn't get huge on tiny screens */
+  line-height: 1.2;
+  margin: 0.5em 0;
+}
+@media (min-width: 600px) {
+  .responsive-h1 {
+    font-size: 5vw;
+  }
+}
+@media (min-width: 768px) {
+  .responsive-h1 {
+    font-size: 4vw;
+  }
+}
+@media (min-width: 1024px) {
+  .responsive-h1 {
+    font-size: 3rem; 
+  }
+}
+
+/* ---------------------------------------------------
+   7) Sidebar Toggle for Mobile
+--------------------------------------------------- */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    padding: 10px;
+  }
+  aside#sidebar {
+    width: 100%;
+    display: none;
+    position: relative;
+    z-index: 1000;
+    background: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  aside#sidebar.show {
+    display: block;
+  }
+  main {
+    width: 100%;
+  }
+  #hamburger {
+    display: block;
+  }
+}
+
+/* ---------------------------------------------------
+   8) Share Sidebar
+--------------------------------------------------- */
+#shareSidebar {
+  position: fixed;
+  top: 20%;
+  right: 0;
+  z-index: 9999;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 0 5px 5px 0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  display: block;
+}
+
+.share-buttons {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.share-buttons li {
+  margin: 10px 0;
+}
+
+.share-buttons li svg {
+  width: 32px;
+  height: 32px;
+}
+
+@media (max-width: 768px) {
+  #shareSidebar {
+    right: 0;
+    padding: 5px;
+  }
+  .share-buttons li svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* ---------------------------------------------------
+   9) Footer
+--------------------------------------------------- */
+.custom-footer {
+  background: #007bff;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  margin-top: auto; /* forces footer to the bottom if content is short */
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-links {
+  margin-top: 10px;
+  display: flex;
+  gap: 15px;
+}
+
+.footer-item {
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+  padding: 5px 10px;
+  transition: color 0.3s ease, background 0.3s ease;
+  border-radius: 5px;
+}
+.footer-item:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #e3f2fd;
+}
+
+  </style>
+</head>
+
+<body>
+  <header class="custom-header">
+    <div id="hamburger" onclick="toggleSidebar()">&#9776;</div>
+    <nav class="nav-links">
+      <a href="/growthworld-premium-tools" class="brand-logo">GrowthWorld Premium Tools HUB</a>
+      <a href="about-us" class="nav-item">About Us</a>
+      <a href="contact" class="nav-item">Contact</a>
+      {{custom_block_logout}}
+    </nav>
+  </header>
+
+  <div class="container">
+    <!-- Sidebar for tools list -->
+    <aside id="sidebar">
+      <h2>Tool Page</h2>
+      {{custom_block_returndashboard}}
+      <a href="/growthworld-premium-tools/login" class="btn-x12yz">Get Access Now</a></br></br>
+      {{custom_block_subscription_link}}
+      {{custom_block_credit_link}}
+      <input type="text" id="searchTool" placeholder="Search option...">
+      <ul id="toolList">
+        <li class="open-tool"><a href="/growthworld-premium-tools/subscription-tools">Checkout Subscription Tools</a></li>
+        <li class="open-tool"><a href="/growthworld-premium-tools/credit-tools">Checkout Credit Tools</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main content area for tool display -->
+    <main>
+      <div class="main-content" id="mainContent">
+        {{custom_block_balance}}
+        <style>
+/* Optional: keep same embed style as your other tool pages */
+.youtube-embed-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+}
+.youtube-embed {
+    width: 100%;
+    max-width: 560px;
+    aspect-ratio: 16 / 9;
+    background: #000;
+}
+.youtube-embed iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+</style>
+
+<h1>Flickr HD Photos Downloader – Save Ultra-High-Resolution Images & Albums</h1>
+
+<h2>Paste Any Flickr Photo or Album URL and Download in 3K, 4K, 6K, or Original</h2>
+
+<p>
+    <strong>Flickr HD Photos Downloader</strong> is a practical, no-nonsense solution for saving Flickr images in the
+    <strong>highest available quality</strong>. Paste a single photo link or an entire album URL and the tool will detect
+    the best-quality versions (3K, 4K, 6K, or original size when available) and download them to your computer. It’s built for
+    <strong>photographers, designers, researchers, students, bloggers, and archivists</strong> who need reliable, bulk-friendly,
+    and metadata-aware downloads without quality loss or manual hassle.
+</p>
+
+<p>
+    Unlike web extensions that break frequently or random scripts that throttle mid-batch, this downloader focuses on
+    <strong>accuracy, consistency, and control</strong>. You choose the input (photo or album), set your output folder,
+    and let the app fetch high-resolution files while preserving clean filenames and optional metadata exports. If you want to
+    <strong>save original-quality images from Flickr</strong> quickly and repeatedly, this tool was made for you.
+</p>
+
+<h3>🚀 Why Choose Flickr HD Photos Downloader?</h3>
+
+<ul>
+    <li>✅ <strong>Highest Quality First:</strong> Targets 3K, 4K, 6K, or the original uploaded resolution when available.</li>
+    <li>✅ <strong>Album-Scale Downloads:</strong> Paste an album URL and fetch every photo automatically.</li>
+    <li>✅ <strong>Bulk Mode:</strong> Handles dozens or hundreds of images without you babysitting the process.</li>
+    <li>✅ <strong>Smart Skips:</strong> Avoids re-downloading duplicates and can resume where you left off.</li>
+    <li>✅ <strong>Clean Filenames:</strong> Uses stable, readable naming with optional indexing.</li>
+    <li>✅ <strong>Metadata Aware:</strong> Optionally export titles, tags, dates, and source links to CSV.</li>
+    <li>✅ <strong>Simple UI:</strong> Paste → Choose quality → Download. No learning curve.</li>
+    <li>✅ <strong>Lightweight:</strong> Efficient logic built for sustained runs and big collections.</li>
+</ul>
+
+<h3>🎯 What You Can Do with It</h3>
+
+<ul>
+    <li><strong>Single Photo Grab:</strong> Paste the photo URL and save the highest-resolution image available.</li>
+    <li><strong>Album Collector:</strong> Paste an album link and automatically retrieve every photo in ultra-HD.</li>
+    <li><strong>Research & Reference:</strong> Build curated, high-quality datasets for study, inspiration, or analysis.</li>
+    <li><strong>Backup Your Work:</strong> If you publish to Flickr, batch-download your portfolio in original quality.</li>
+    <li><strong>Creative Workflows:</strong> Designers and content creators can quickly populate mood boards and drafts.</li>
+</ul>
+
+<h3>🧩 Key Features (Deep Dive)</h3>
+
+<ul>
+    <li><strong>Flexible Input:</strong>
+        <ul>
+            <li>Paste a <em>photo URL</em> (tool saves that specific image).</li>
+            <li>Paste an <em>album URL</em> (tool saves the entire set).</li>
+        </ul>
+    </li>
+    <li><strong>Resolution Priority:</strong>
+        <ul>
+            <li>Targets <em>Original</em> when accessible, else falls back through <em>6K → 4K → 3K</em> tiers.</li>
+            <li>Optional lock to a specific max tier (e.g., download only up to 4K).</li>
+        </ul>
+    </li>
+    <li><strong>Bulk & Resume Logic:</strong>
+        <ul>
+            <li>Skips already downloaded files by hash or filename.</li>
+            <li>Can resume long runs after interruptions without starting over.</li>
+        </ul>
+    </li>
+    <li><strong>Output Control:</strong>
+        <ul>
+            <li>Choose a base folder; album downloads create neat subfolders.</li>
+            <li>Filename templates with placeholders like <code>{index}</code>, <code>{title}</code>, <code>{photo_id}</code>.</li>
+        </ul>
+    </li>
+    <li><strong>Metadata Export (Optional):</strong>
+        <ul>
+            <li>CSV with columns like Title, Description, Author, Tags, Date, Source URL, Saved Path.</li>
+            <li>Great for cataloging, research notes, and credit tracking.</li>
+        </ul>
+    </li>
+    <li><strong>Robust Error Handling:</strong>
+        <ul>
+            <li>Retries transient failures with backoff.</li>
+            <li>Clear progress logs to troubleshoot any skipped or restricted items.</li>
+        </ul>
+    </li>
+</ul>
+
+<h3>🛠️ How to Use (Step-by-Step)</h3>
+
+<ol>
+    <li>📥 <strong>Launch the app</strong> (no complicated setup required).</li>
+    <li>🔗 <strong>Paste a Flickr URL:</strong> either a single <em>photo</em> link or an <em>album</em> link.</li>
+    <li>🗂️ <strong>Choose your output folder</strong> and (optionally) a filename template.</li>
+    <li>🖼️ <strong>Pick quality</strong> (Original, or the highest tier like 6K/4K/3K you want to target).</li>
+    <li>▶️ <strong>Start Download:</strong> watch the progress log as images are saved.</li>
+    <li>📄 <strong>(Optional)</strong> Enable CSV export to capture titles, authors, tags, and source URLs.</li>
+    <li>✅ <strong>Done:</strong> open the output folder — your images are ready in ultra-high resolution.</li>
+</ol>
+
+<h3>💡 Pro Tips for Power Users</h3>
+
+<ul>
+    <li><strong>Curate First:</strong> For massive albums, skim the set on Flickr and use “faves” or folders to keep downloads focused.</li>
+    <li><strong>Template Filenames:</strong> Include <code>{photo_id}</code> to ensure uniqueness across large datasets.</li>
+    <li><strong>Tier Cap:</strong> If storage is tight, cap at 4K — still excellent quality for print and design drafts.</li>
+    <li><strong>CSV + Credits:</strong> Use the CSV to automatically build credit lines for blogs or reports.</li>
+    <li><strong>Batch Inputs:</strong> Run multiple album links sequentially to build organized, labeled archives.</li>
+</ul>
+
+<h3>🔎 Quality, Formats, and Color</h3>
+
+<p>
+    Flickr stores multiple sizes per photo; availability depends on uploader settings. When the original is accessible,
+    the downloader prioritizes it. Otherwise, it falls back through the largest public sizes (e.g., 6K, 4K, 3K).
+    Images are saved in their native format (commonly JPEG/PNG). If a downloaded image contains alpha/transparency,
+    the tool can flatten to a white background for maximum compatibility with editors or print workflows.
+</p>
+
+<h3>🧰 Troubleshooting & FAQs</h3>
+
+<div itemscope itemtype="https://schema.org/FAQPage">
+    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <h4 itemprop="name">❓ The album has hundreds of photos. Will the tool stall midway?</h4>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <p itemprop="text">
+                It’s built for long runs. If a network hiccup occurs, the retry logic kicks in. Already saved photos
+                won’t be re-downloaded, so you can rerun safely to complete any missing items.
+            </p>
+        </div>
+    </div>
+
+    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <h4 itemprop="name">❓ Can I choose a specific max quality like 4K only?</h4>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <p itemprop="text">
+                Yes. You can cap the resolution tier to control file size and storage while maintaining excellent visual fidelity.
+            </p>
+        </div>
+    </div>
+
+    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <h4 itemprop="name">❓ Does it work with private photos or restricted originals?</h4>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <p itemprop="text">
+                No. The downloader accesses only what is publicly available to your browser. If the uploader restricts original size,
+                the tool will fetch the largest public variant instead.
+            </p>
+        </div>
+    </div>
+
+    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <h4 itemprop="name">❓ Will my filenames be readable and consistent?</h4>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <p itemprop="text">
+                Yes. By default the tool uses clean, readable filenames. You can add <code>{index}</code> or <code>{photo_id}</code>
+                to keep massive sets orderly and unique.
+            </p>
+        </div>
+    </div>
+
+    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <h4 itemprop="name">❓ Can I export metadata for cataloging and credits?</h4>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <p itemprop="text">
+                Absolutely. Enable CSV export to capture titles, descriptions, tags, dates, authors, and source URLs for each saved photo.
+            </p>
+        </div>
+    </div>
+
+    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <h4 itemprop="name">❓ Does the app alter my photos (compression, color, or EXIF)?</h4>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <p itemprop="text">
+                No artificial compression is added. The tool saves the exact file served by Flickr for that size tier.
+                EXIF preservation depends on what Flickr serves for the chosen size variant.
+            </p>
+        </div>
+    </div>
+</div>
+
+<h3>🧪 Example Workflow (From Album to Organized Archive)</h3>
+
+<ol>
+    <li>Open the album on Flickr and copy its URL.</li>
+    <li>Paste the URL into the downloader and pick “Original” (or 6K/4K if you prefer).</li>
+    <li>Set filename template to <code>{index}_{title}_{photo_id}</code> for strong uniqueness.</li>
+    <li>Enable CSV export to track tags and authors for future credits.</li>
+    <li>Start the download and let the tool run. If the network blips, simply rerun — completed files are skipped.</li>
+    <li>Result: a neat folder containing ultra-HD images plus a CSV catalog for your records.</li>
+</ol>
+
+<h3>🧯 Antivirus Notes</h3>
+<p><strong style="color:red;">
+    Some antivirus tools may flag lesser-known utilities as false positives. If that happens, temporarily allow the app,
+    run your downloads, and then restore your antivirus to normal protection levels.
+</strong></p>
+
+<h3>🖥️ System Requirements</h3>
+<ul>
+    <li>✔️ Windows 10/11 (64-bit)</li>
+    <li>✔️ Internet connection</li>
+    <li>✔️ Sufficient disk space for large originals (4K/6K can be big)</li>
+</ul>
+
+<h3>📥 Download & Get Started</h3>
+<p>
+    Ready to build your high-resolution image library? Paste a link and let
+    <strong>Flickr HD Photos Downloader</strong> do the heavy lifting — no compromises on quality.
+</p>
+
+<p>
+    <a href="https://www.mediafire.com/file/u9d27o8sjaxfcbc/Flickr_HD_Photos_Downloader.zip/file" class="btn-x12yz">Download Flickr HD Photos Downloader</a>
+</p>
+
+<h3>🎥 Watch the Demo</h3>
+<div class="youtube-embed-wrapper">
+    <div class="youtube-embed">
+        <!-- Replace with your actual video URL -->
+        <iframe 
+            src="https://www.youtube.com/embed/1CEqXaTzQPg"
+            title="Flickr HD Photos Downloader Demo | Save Albums in 4K/6K"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+        </iframe>
+    </div>
+</div>
+
+<h3>🔐 Respect for Usage & Rights</h3>
+<p>
+    Always respect license terms and creator rights. Download only what you are permitted to save and use,
+    and credit creators as required by the license attached to each photo. This tool is intended to simplify your
+    own workflow — make sure your use aligns with Flickr’s Terms of Service and the photo owner’s license.
+</p>
+
+<h3>📚 Use Cases & Ideas</h3>
+<ul>
+    <li><strong>Photography Students:</strong> Build a reference catalog of styles and lighting setups in high resolution.</li>
+    <li><strong>Design Studios:</strong> Maintain a large, categorized inspiration archive synced with project folders.</li>
+    <li><strong>Bloggers/Editors:</strong> Rapidly evaluate image candidates at full quality before reaching out for permission.</li>
+    <li><strong>Archivists/Libraries:</strong> Preserve high-value collections with metadata for long-term access.</li>
+    <li><strong>Researchers:</strong> Analyze visual datasets without compression artifacts skewing results.</li>
+</ul>
+
+<h3>🧭 Best Practices for Massive Collections</h3>
+<ul>
+    <li><strong>Plan Storage:</strong> Originals and 6K images are sizable — consider a dedicated drive.</li>
+    <li><strong>Folder Strategy:</strong> Use per-album subfolders to keep projects clean and portable.</li>
+    <li><strong>Checksums or IDs:</strong> Keep <code>{photo_id}</code> in filenames for deduping across collections.</li>
+    <li><strong>Document Sources:</strong> Export CSV; it’s invaluable for tracing attributions later.</li>
+    <li><strong>Regular Backups:</strong> Mirror to an external drive or NAS after major pulls.</li>
+</ul>
+
+<h3>📣 Final Word</h3>
+<p>
+    <strong>Flickr HD Photos Downloader</strong> is built to be the dependable, repeatable step in your image-collection pipeline.
+    Paste links, pick your quality, and receive ultra-HD results you can trust — without getting stuck in low-res rips,
+    browser quirks, or broken scripts. For anyone serious about visual quality, this tool becomes a quiet essential.
+</p>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Floating share sidebar -->
+  <div id="shareSidebar" style="display:block;">
+    <ul class="share-buttons">
+      <li><a id="facebook-share" href="#" title="Share on Facebook" target="_blank">
+        <!-- Facebook SVG -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#3b5998" d="M22.675 0H1.325C.594 0 0 .593 0 1.324v21.351C0 23.406.594 24 1.325 24H12.82V14.706H9.692v-3.68h3.128V8.413c0-3.097 1.894-4.788 4.662-4.788 1.325 0 2.463.098 2.795.142v3.24h-1.918c-1.504 0-1.796.715-1.796 1.762v2.308h3.588l-.467 3.68h-3.12V24h6.116C23.406 24 24 23.406 24 22.675V1.325C24 .594 23.406 0 22.675 0z"/></svg>
+      </a></li>
+      <li><a id="twitter-share" href="#" title="Tweet" target="_blank">
+        <!-- Twitter SVG -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#1DA1F2" d="M23.954 4.569c-.885.391-1.83.656-2.825.775 1.014-.609 1.794-1.574 2.163-2.723-.949.555-2.003.959-3.127 1.184-.897-.957-2.178-1.555-3.594-1.555-2.719 0-4.924 2.205-4.924 4.924 0 .385.045.761.127 1.122C7.691 8.094 4.067 6.13 1.64 3.161c-.422.722-.664 1.561-.664 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.386 1.693 4.374 3.946 4.827-.412.111-.849.171-1.296.171-.317 0-.626-.03-.928-.085.631 1.953 2.445 3.376 4.6 3.416-1.68 1.318-3.809 2.102-6.114 2.102-.397 0-.79-.023-1.175-.067 2.179 1.396 4.768 2.211 7.548 2.211 9.054 0 14.004-7.497 14.004-13.986 0-.213 0-.426-.015-.637.961-.694 1.8-1.562 2.46-2.549l-.047-.02z"/></svg>
+      </a></li>
+      <li><a id="linkedin-share" href="#" title="Share on LinkedIn" target="_blank">
+        <!-- LinkedIn SVG -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#0077B5" d="M22.23 0H1.77C.79 0 0 .774 0 1.729v20.543C0 23.225.79 24 1.77 24h20.46C23.21 24 24 23.225 24 22.272V1.729C24 .774 23.21 0 22.23 0zM7.12 20.452H3.56V9H7.12v11.452zM5.34 7.648c-1.148 0-1.872-.786-1.872-1.764 0-.988.742-1.763 1.91-1.763 1.17 0 1.872.775 1.882 1.763 0 .978-.712 1.764-1.92 1.764zm13.872 12.804h-3.556v-6.23c0-1.565-.557-2.633-1.954-2.633-1.064 0-1.698.711-1.978 1.396-.102.243-.127.58-.127.92v6.547h-3.556s.046-10.633 0-11.452h3.556v1.623c.472-.729 1.32-1.77 3.216-1.77 2.35 0 4.108 1.534 4.108 4.831v6.768z"/></svg>
+      </a></li>
+      <li><a id="reddit-share" href="#" title="Submit to Reddit" target="_blank">
+        <!-- Reddit SVG -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#FF4500" d="M24 12c0-6.63-5.373-12-12-12S0 5.37 0 12c0 5.292 3.437 9.8 8.205 11.385-.113-.964-.213-2.443.045-3.492.237-1.015 1.522-6.476 1.522-6.476s-.388-.775-.388-1.922c0-1.8 1.043-3.145 2.348-3.145 1.106 0 1.64.83 1.64 1.826 0 1.115-.71 2.781-1.075 4.33-.302 1.275.635 2.313 1.88 2.313 2.254 0 3.976-2.378 3.976-5.797 0-2.39-1.716-4.078-4.167-4.078-2.841 0-4.508 2.134-4.508 4.343 0 .865.332 1.795.748 2.302.083.1.096.188.07.288-.077.315-.25.999-.283 1.14-.044.18-.144.22-.332.132-1.235-.574-2.008-2.374-2.008-3.833 0-3.108 2.25-5.97 6.487-5.97 3.404 0 6.05 2.427 6.05 5.678 0 3.364-2.122 6.086-5.07 6.086-1.015 0-1.968-.53-2.293-1.158l-.623 2.377c-.225.89-.84 2.004-1.255 2.682.94.283 1.92.44 2.946.44 6.628 0 12-5.37 12-12z"/></svg>
+      </a></li>
+      <li><a id="whatsapp-share" href="#" title="Share on WhatsApp" target="_blank">
+        <!-- WhatsApp SVG -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#25D366" d="M20.52 3.451c-4.293-4.293-11.243-4.293-15.537 0-4.293 4.294-4.293 11.243 0 15.537a10.892 10.892 0 0 0 7.737 3.204c1.356 0 2.685-.264 3.94-.793l3.98 1.062-.64-3.9a10.878 10.878 0 0 0 3.198-7.738 10.885 10.885 0 0 0-3.198-7.737zM12 21.432c-1.247 0-2.47-.243-3.613-.723l-.26-.107-2.362.63.627-2.353-.114-.24c-.678-1.439-.766-3.042-.246-4.58a8.99 8.99 0 0 1 8.479-6.187c2.4 0 4.654.934 6.343 2.624a8.968 8.968 0 0 1 2.625 6.343 8.992 8.992 0 0 1-6.185 8.481c-.86.292-1.764.44-2.667.44z"/></svg>
+      </a></li>
+    </ul>
+  </div>
+
+  <script>
+    // Toggle the sidebar for mobile
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('show');
+    }
+
+    // Open tool link in same tab
+    document.addEventListener('click', function(event) {
+      if (event.target.closest('.open-tool')) {
+        const liElement = event.target.closest('.open-tool');
+        const link = liElement.querySelector('a');
+        if (link && link.href) {
+          window.open(link.href, '_self');
+        }
+      }
+    });
+
+    // Search filter for sidebar
+    document.getElementById('searchTool').addEventListener('keyup', function() {
+      const searchQuery = this.value.toLowerCase();
+      const toolListItems = document.querySelectorAll('#toolList li');
+      toolListItems.forEach(function(item) {
+        const toolName = item.textContent.toLowerCase();
+        item.style.display = toolName.includes(searchQuery) ? '' : 'none';
+      });
+    });
+
+    // Dynamic share links
+    const currentURL = encodeURIComponent(window.location.href);
+    const currentTitle = encodeURIComponent(document.title);
+    document.getElementById('facebook-share').href =
+      `https://www.facebook.com/sharer/sharer.php?u=${currentURL}`;
+    document.getElementById('twitter-share').href =
+      `https://twitter.com/intent/tweet?url=${currentURL}&text=${currentTitle}`;
+    document.getElementById('linkedin-share').href =
+      `https://www.linkedin.com/shareArticle?mini=true&url=${currentURL}&title=${currentTitle}&summary=${currentTitle}`;
+    document.getElementById('reddit-share').href =
+      `https://www.reddit.com/submit?url=${currentURL}&title=${currentTitle}`;
+    document.getElementById('whatsapp-share').href =
+      `https://api.whatsapp.com/send?text=${currentTitle}%20${currentURL}`;
+  </script>
+
+  <footer class="custom-footer">
+    <div class="footer-content">
+      <p>&copy; 2025 GrowthWorld. All rights reserved.</p>
+      <nav class="footer-links">
+        <a href="terms-of-service" class="footer-item">Terms of Service</a>
+        <a href="privacy-policy" class="footer-item">Privacy Policy</a>
+        <a href="contact" class="footer-item">Contact</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

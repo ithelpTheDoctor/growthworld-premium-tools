@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{custom_block_seo_meta}}
+    <script>
+		window.debug = true;
+	</script>
+	
+	<style>
+		.responsive-h1 {
+			font-size: 3vw; /* Adjust based on viewport width */
+			line-height: 1.2; /* Line height for better readability */
+			margin: 0.5em 0;
+		}
+
+		@media (min-width: 768px) {
+			.responsive-h1 {
+				font-size: 4vw; /* Slightly smaller on tablets and small desktops */
+			}
+		}
+
+		@media (min-width: 1024px) {
+			.responsive-h1 {
+				font-size: 3rem; /* Set a fixed size for larger desktops */
+			}
+		}
+		a {
+			text-decoration: none;
+		}
+		#toolContent {
+			text-align: left;
+		}
+		.tool-ui {
+			text-align: center;
+			justify-content:center;
+		}
+	</style>
+	
+	<style>
+			/* Google Fonts for cleaner text */
+			@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				font-family: 'Roboto', sans-serif;
+				background-color: #f0f0f0;
+				color: #333;
+			}
+
+			header {
+				background-color: #6200ea;
+				color: white;
+				padding: 15px;
+				text-align: center;
+				font-size: clamp(16px, 4vw, 16px);
+				font-weight: bold;
+				position: sticky;
+				top: 0;
+				z-index: 1000;
+				box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+			}
+
+			/* Container styling */
+			.container {
+				display: flex;
+				flex-direction: row;
+				padding: 20px;
+				gap: 20px;
+				min-height: calc(100vh - 60px); /* Subtracting header height */
+			}
+
+			/* Sidebar styling */
+			aside {
+				width: 250px;
+				background-color: white;
+				padding: 20px;
+				border-radius: 10px;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+				display: block;
+				height: calc(100vh - 120px); /* Fixed height to ensure scrolling */
+				overflow-y: auto;
+			}
+
+			aside h2 {
+				font-size: 18px;
+				margin-bottom: 20px;
+				color: #333;
+			}
+
+			aside ul {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+			}
+
+			aside ul li {
+				padding: 12px 15px;
+				background-color: #eeeeee;
+				border-radius: 8px;
+				margin-bottom: 10px;
+				cursor: pointer;
+				text-align: center;
+				transition: background-color 0.3s ease, box-shadow 0.3s ease;
+			}
+
+			aside ul li:hover {
+				background-color: #dddddd;
+				box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+			}
+
+			/* Main content styling */
+			main {
+				flex: 1;
+				background-color: white;
+				padding: 20px;
+				border-radius: 10px;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+				overflow-y: auto;
+				max-height: calc(100vh - 120px); /* Main content is also fixed */
+			}
+
+			main h2 {
+				font-size: 22px;
+				margin-bottom: 20px;
+				color: #333;
+			}
+
+			main .tool-content {
+				min-height: 300px;
+				padding: 10px;
+				background-color: #fafafa;
+				border-radius: 5px;
+				text-align: center;
+				line-height: 1.6em;
+			}
+
+			/* Mobile-first, responsive hamburger menu */
+			#hamburger {
+				display: none;
+				font-size: 30px;
+				cursor: pointer;
+				position: absolute;
+				top: 15px;
+				left: 20px;
+				z-index: 1001;
+			}
+
+			@media (max-width: 768px) {
+				.container {
+					flex-direction: column;
+					padding: 10px;
+				}
+
+				aside {
+					width: 100%;
+					display: none;
+					position: absolute;
+					top: 60px;
+					left: 0;
+					z-index: 1000;
+				}
+
+				aside.show {
+					display: block;
+				}
+
+				main {
+					width: 100%;
+				}
+
+				#hamburger {
+					display: block;
+					color: white;
+				}
+			}
+			
+    </style>
+	
+
+</head>
+<body>
+
+<header>
+    <div id="hamburger" onclick="toggleSidebar()">&#9776;</div>
+    <a href="/growthworld-free-productivity-tools-hub" style="
+    text-decoration: none;
+    color: inherit;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font-size: clamp(.8rem, 2vw, 2rem); /* Responsive font size */
+    font-family: inherit;
+    font-weight: inherit;
+    line-height: 1.5; /* Improved readability */
+    cursor: pointer;
+    outline: none;
+    display: inline-block;
+    text-align: center;
+    white-space: nowrap; /* Prevents text wrapping */
+    z-index: 1; /* Ensure it is not covered by other elements */
+    position: relative; /* Prevent overlapping with absolute elements */
+    padding: 10px; /* Add padding to avoid overlapping */
+">GrowthWorld Free Productivity Tools HUB</a>
+
+
+
+</header>
+
+<div class="container">
+    <!-- Sidebar for tools list -->
+   <aside id="sidebar">
+		<h2>{{custom_block_sideheading}}</h2>		<!-- Search box for filtering the tool list -->
+		<input type="text" id="searchTool" placeholder="Search option..." style="width: 100%; padding: 8px; margin-bottom: 10px;">
+		
+		<ul id="toolList">
+			<li class="open-tool"><a href="/growthworld-premium-tools/subcription-tools">Subscription Tools</a></li>
+			<li class="open-tool"><a href="/growthworld-premium-tools/credit-tools">Credits Tools</a></li>
+		</ul>
+	</aside>
+	<style>
+		/* Styling for the tool list */
+		#toolList {
+			list-style-type: none;
+			padding: 0;
+			margin: 0;
+		}
+
+		#toolList li {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 12px;
+			background-color: #f9f9f9;
+			margin-bottom: 10px;
+			border-radius: 5px;
+			transition: background-color 0.3s ease, box-shadow 0.3s ease;
+		}
+
+		#toolList li:hover {
+			background-color: #e9f5ff;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		}
+
+		#toolList li a {
+			text-decoration: none;
+			font-size: 16px;
+			color: #007bff;
+			font-weight: bold;
+			transition: color 0.3s ease;
+		}
+
+		#toolList li a:hover {
+			color: #0056b3;
+		}
+
+		.coming-soon {
+			font-size: 14px;
+			color: #888;
+			font-style: italic;
+		}
+
+		/* Mobile responsiveness */
+		@media (max-width: 600px) {
+			#toolList li {
+				flex-direction: column;
+				align-items: flex-start;
+			}
+
+			.coming-soon {
+				margin-top: 5px;
+			}
+		}
+	</style>
+	<script>
+		// JavaScript function to filter the list of tools
+		document.getElementById('searchTool').addEventListener('keyup', function() {
+			const searchQuery = this.value.toLowerCase();
+			const toolListItems = document.querySelectorAll('#toolList li');
+
+			toolListItems.forEach(function(item) {
+				const toolName = item.textContent.toLowerCase();
+				if (toolName.includes(searchQuery)) {
+					item.style.display = '';
+				} else {
+					item.style.display = 'none';
+				}
+			});
+		});
+	</script>
+    <!-- Main content area for tool display -->
+    <main style="margin-right:40px;">
+        <div class="tool-content" id="toolContent"><div><div class="tool-ui">
+    <div style="width:100%; max-width:800px; margin:0 auto; background-color:#fff; padding:20px; border-radius:10px; box-shadow:0 4px 8px rgba(0, 0, 0, 0.1);">
+        <div style="display: flex; justify-content: center; margin-top: 20px;">
+			<h1 style="font-family: Arial, sans-serif; color: #333;">Extract Audio from Videos Easily - Free Online Tool</h1>
+		</div>
+
+
+        <div id="drop-area" style="position: relative; width: 100%; max-width: 500px; height: 300px; border: 2px dashed #ccc; border-radius: 10px; display: flex; justify-content: center; align-items: center; background-color: white; text-align: center; transition: background-color 0.3s; padding: 20px; box-sizing: border-box; margin:20px auto; cursor: pointer;">
+			<p id="drop-text" style="font-size: 18px; color: #666; margin: 0; position: absolute; top: 30%; transform: translateY(-50%); z-index: 10;">Drag &amp; Drop video file here or click to upload<br><strong>Size limit 2GB~</strong><br><span id="file-count"></span></p>
+            <input type="file" id="videoFiles" accept="*" style="display:none;">
+			<style>
+				#drop-area::before {
+					content: '+';
+					font-size: 100px;
+					color: #ccc;
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+					z-index: 1;
+				}
+
+				#drop-area.active {
+					background-color: #e0e0e0;
+					border-color: #333;
+				}
+
+				@media (max-width: 768px) {
+					#drop-area {
+						height: 200px;
+					}
+
+					#drop-area p {
+						font-size: 16px;
+					}
+
+					#drop-area::before {
+						font-size: 70px;
+					}
+				}
+				
+			</style>
+        </div>
+		<style>
+			.select-audio {
+				display: inline-block;
+				padding: 10px 20px;
+				font-size: 16px;
+				font-weight: bold;
+				color: #fff;
+				background-color: #007bff;
+				border: none;
+				border-radius: 5px;
+				cursor: pointer;
+				text-align: center;
+				transition: all 0.3s ease;
+			}
+			.start-btn {
+				display: inline-block;
+				padding: 10px 20px;
+				font-size: 16px;
+				font-weight: bold;
+				color: #fff;
+				background-color: #20283E;
+				border: none;
+				border-radius: 5px;
+				cursor: pointer;
+				text-align: center;
+				transition: all 0.3s ease;
+			}
+			
+			.dl-btn {
+				display: inline-block;
+				padding: 10px 20px;
+				font-size: 16px;
+				font-weight: bold;
+				color: #fff;
+				background-color: #004000;
+				border: none;
+				border-radius: 5px;
+				cursor: pointer;
+				text-align: center;
+				transition: all 0.3s ease;
+			}
+			
+			
+		</style>
+	  
+		<div style="display: flex; justify-content: center; margin-top: 20px;display:none" id="extract-section">
+			<div style="text-align: center; max-width: 300px; width: 100%;">			
+				<div>
+					<br>
+					<button id="start-btn" class="start-btn" onclick="extractAudios()">Extract Audio(s)</button>
+				</div>
+				<div>
+					<p id="progress" style="margin-top:15px;"></p>
+				</div>
+				<div>
+					<button id="dl-btn" class="dl-btn" onclick="downloadAudios()">Download Audio(s)</button>
+				</div>
+				<br>
+				
+			</div>		
+		</div>
+		
+	</div>
+</div>
+
+<div class="intro">
+    <div style="width:100%; max-width:800px; margin:0 auto; background-color:#fff; padding:20px; border-radius:10px; box-shadow:0 4px 8px rgba(0, 0, 0, 0.1); font-family:Arial, sans-serif; padding-bottom:40px;">
+        <h1 style="color:#333; font-size:24px; text-align:center; margin-bottom:20px;">
+            Extract Audio from Videos Easily - Free Online Tool
+        </h1>
+
+        <p style="font-size:16px; color:#555; line-height:1.8; margin-bottom:20px;">
+            Looking for a simple way to <strong>extract audio from videos</strong>? Whether you're a music enthusiast, podcast creator, or video editor, our <strong>free online audio extractor</strong> has you covered. Powered by cutting-edge FFmpeg WASM technology, this tool makes it effortless to extract audio tracks from video files. Forget complex software downloads&acirc;&#128;&#148;our browser-based solution works seamlessly on any device, providing high-quality audio files in just a few clicks.
+        </p>
+        <p style="font-size:16px; color:#555; line-height:1.8; margin-bottom:20px;">
+            Compatible with a wide range of video formats including MP4, MKV, AVI, and MOV, this tool enables you to extract audio in popular formats like MP3, WAV, and AAC. Designed for both beginners and professionals, our <strong>online audio extractor</strong> delivers exceptional speed and accuracy while ensuring your files remain private and secure.
+        </p>
+
+        <h2 style="color:#333; font-size:20px; margin-top:30px; margin-bottom:10px;">Why Extract Audio from Videos?</h2>
+        <p style="font-size:16px; color:#555; line-height:1.8; margin-bottom:20px;">
+            Audio extraction has a variety of applications, whether for personal or professional use. Here's why extracting audio from videos can be incredibly useful:
+        </p>
+        <ul style="list-style-type:disc; padding-left:40px; font-size:16px; color:#555; line-height:1.8; margin-bottom:20px;">
+            <li><strong>Create Podcasts:</strong> Extract audio to use as standalone content for podcasts or voiceovers.</li>
+            <li><strong>Save Music Tracks:</strong> Extract songs or background scores from videos for offline listening.</li>
+            <li><strong>Enhance Video Editing:</strong> Separate audio tracks for remixing or adding new effects to videos.</li>
+            <li><strong>Content Repurposing:</strong> Use extracted audio in presentations, tutorials, or other creative projects.</li>
+            <li><strong>Language Learning:</strong> Save audio tracks for practicing pronunciations or understanding dialogues.</li>
+        </ul>
+
+        <h2 style="color:#333; font-size:20px; margin-top:30px; margin-bottom:10px;">Features of Our Free Online Audio Extractor</h2>
+        <p style="font-size:16px; color:#555; line-height:1.8; margin-bottom:20px;">
+            Our tool stands out as one of the best <strong>audio extraction tools</strong> available online. Here's what makes it special:
+        </p>
+        <ul style="list-style-type:disc; padding-left:40px; font-size:16px; color:#555; line-height:1.8; margin-bottom:20px;">
+            <li><strong>Browser-Based:</strong> No downloads required&acirc;&#128;&#148;use it directly in your browser.</li>
+            <li><strong>Multi-Format Support:</strong> Works with MP4, MKV, AVI, MOV, and more.</li>
+            <li><strong>Audio Format Options:</strong> Extract audio in MP3, WAV, or AAC for maximum flexibility.</li>
+            <li><strong>High-Quality Output:</strong> Ensures crystal-clear audio files for professional results.</li>
+            <li><strong>Free to Use:</strong> 100% free with no hidden fees.</li>
+            <li><strong>Fast and Reliable:</strong> Extract audio in seconds with no technical expertise needed.</li>
+            <li><strong>Privacy Guaranteed:</strong> Files are processed in your browser, ensuring data security.</li>
+        </ul>
+
+        <h2 style="color:#333; font-size:20px; margin-top:30px; margin-bottom:10px;">How to Use the Audio Extractor Tool</h2>
+        <p style="font-size:16px; color:#555; line-height:1.8; margin-bottom:20px;">
+            Extracting audio from videos is quick and easy. Follow these steps to get started:
+        </p>
+        <ol style="font-size:16px; color:#555; line-height:1.8; padding-left:40px; margin-bottom:20px;">
+            <li><strong>Upload Your Video:</strong> Click the upload button to select your video file. Supported formats include MP4, MKV, AVI, and more.</li>
+            <li><strong>Choose Audio Format:</strong> Select the format you want for your extracted audio (e.g., MP3, WAV, AAC).</li>
+            <li><strong>Start Extraction:</strong> Hit the extract button, and our tool will process your video to extract the audio track.</li>
+            <li><strong>Download Audio File:</strong> Once the process is complete, download your audio file instantly.</li>
+        </ol>
+
+        <h2 style="color:#333; font-size:20px; margin-top:30px; margin-bottom:10px;">Who Can Benefit from This Tool?</h2>
+        <p style="font-size:16px; color:#555; line-height:1.8; margin-bottom:20px;">
+            Our <strong>free online audio extractor</strong> is ideal for a variety of users:
+        </p>
+        <ul style="list-style-type:disc; padding-left:40px; font-size:16px; color:#555; line-height:1.8; margin-bottom:20px;">
+            <li><strong>Content Creators:</strong> Use extracted audio for podcasts, tutorials, and more.</li>
+            <li><strong>Video Editors:</strong> Separate audio tracks for remixing or enhancing videos.</li>
+            <li><strong>Music Lovers:</strong> Save background music or songs from videos for offline listening.</li>
+            <li><strong>Teachers and Educators:</strong> Extract audio tracks for lessons or presentations.</li>
+            <li><strong>Social Media Managers:</strong> Create audio-based content to boost engagement on platforms like Instagram and TikTok.</li>
+        </ul>
+
+        <h2 style="color:#333; font-size:20px; margin-top:30px; margin-bottom:10px;">Start Extracting Audio Now!</h2>
+        <p style="font-size:16px; color:#555; line-height:1.8; margin-bottom:20px;">
+            Don't wait, try our <strong>free online audio extractor</strong> today and experience the fastest and easiest way to extract audio from videos. Whether you're saving music, creating podcasts, or remixing audio tracks, this tool is your ultimate solution. Start now and take your creative projects to the next level!
+        </p>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.6.0/jszip.min.js"></script>
+
+<script>
+let selectedVideo = null;
+let ffmpegObject = null;
+let extractedStreams = [];
+document.addEventListener("DOMContentLoaded", function () {
+    const dropArea = document.getElementById("drop-area");
+    const videoFileInput = document.getElementById("videoFiles");
+    const generateSection = document.getElementById("extract-section");
+    const startBtn = document.getElementById("start-btn");
+    const fileCountDisplay = document.querySelector("#file-count");
+	
+    // Drag-and-drop setup
+    setupDragAndDrop(dropArea, videoFileInput);
+
+    // Handle file input change
+    videoFileInput.addEventListener("change", (e) => processFiles(e.target.files));
+
+    function setupDragAndDrop(dropArea, videoFileInput) {
+        // Prevent default drag behaviors
+        ["dragenter", "dragover", "dragleave", "drop"].forEach(eventName => {
+            dropArea.addEventListener(eventName, preventDefaults, false);
+        });
+
+        // Highlight drop area on dragover
+        ["dragenter", "dragover"].forEach(eventName => {
+            dropArea.addEventListener(eventName, () => dropArea.classList.add("active"), false);
+        });
+
+        // Remove highlight on dragleave/drop
+        ["dragleave", "drop"].forEach(eventName => {
+            dropArea.addEventListener(eventName, () => dropArea.classList.remove("active"), false);
+        });
+
+        // Handle drop
+        dropArea.addEventListener("drop", (e) => {
+            const files = e.dataTransfer.files;
+            processFiles(files);
+        });
+
+        // Allow manual file selection
+        dropArea.addEventListener("click", () => videoFileInput.click());
+    }
+
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+    function processFiles(files) {
+        if (files.length === 0) {
+            alert("No video file selected. Please try again.");
+            return;
+        }
+
+		fileCountDisplay.innerHTML = `Selected ${files.length} Video`;
+		generateSection.style.display = 'flex';
+		document.getElementById("start-btn").style.display = "inline-block";
+		document.getElementById("dl-btn").style.display = "none";
+		document.getElementById("progress").textContent = "";		
+		selectedVideo = files[0];
+		extractedStreams = null;
+    }
+});
+
+function getExtensionForCodec(codec, type) {
+	const codecLower = codec.toLowerCase();
+	const typeLower = type.toLowerCase();
+
+	// Audio Codecs
+	if (codecLower.includes("aac")) return "aac";
+	if (codecLower.includes("mp3")) return "mp3";
+	if (codecLower.includes("flac")) return "flac";
+	if (codecLower.includes("opus")) return "opus";
+	if (codecLower.includes("pcm") || codecLower.includes("wav")) return "wav";
+	if (codecLower.includes("ac3")) return "ac3";
+	if (codecLower.includes("eac3")) return "eac3";
+	if (codecLower.includes("dts")) return "dts";
+	if (codecLower.includes("alac")) return "m4a";
+	if (codecLower.includes("atrac")) return "aa3"; // ATRAC codecs
+	if (codecLower.includes("ape")) return "ape";  // Monkey's Audio
+	if (codecLower.includes("wma")) return "wma";  // Windows Media Audio
+	if (codecLower.includes("ra_") || codecLower.includes("cook") || codecLower.includes("sipr")) return "ra";
+	if (codecLower.includes("mp2")) return "mp2";
+	if (codecLower.includes("vorbis")) return "ogg";
+	if (codecLower.includes("speex")) return "spx";
+	if (codecLower.includes("tta")) return "tta";  // True Audio
+	if (codecLower.includes("wavpack") || codecLower.includes("wv")) return "wv";
+	if (codecLower.includes("mpc")) return "mpc";  // Musepack
+	if (codecLower.includes("amr_nb")) return "amr";
+	if (codecLower.includes("amr_wb")) return "awb";
+
+	// Subtitle Codecs
+	if (codecLower.includes("subrip")) return "srt";      // SubRip Subtitle
+	if (codecLower.includes("ass")) return "ass";         // Advanced SubStation Alpha
+	if (codecLower.includes("ssa")) return "ssa";         // SubStation Alpha
+	if (codecLower.includes("mov_text")) return "txt";    // Text-based subtitles in MP4/MOV
+	if (codecLower.includes("webvtt")) return "vtt";      // Web Video Text Tracks
+	if (codecLower.includes("hdmv_pgs_subtitle")) return "sup"; // Blu-ray PGS subtitles
+	if (codecLower.includes("dvd_subtitle")) return "sub";     // DVD subtitles
+	if (codecLower.includes("dvb_subtitle")) return "sub";     // DVB subtitles
+	if (codecLower.includes("teletext")) return "txt";
+	if (codecLower.includes("xsub")) return "sub";        // XSUB
+	if (codecLower.includes("sami")) return "smi";        // SAMI subtitles
+	if (codecLower.includes("realtext")) return "rt";     // RealText subtitles
+	if (codecLower.includes("subviewer")) return "sub";   // SubViewer subtitles
+	if (codecLower.includes("microdvd")) return "sub";    // MicroDVD subtitles
+	if (codecLower.includes("pjs")) return "pjs";         // PJS subtitles
+	if (codecLower.includes("mpl2")) return "mpl";        // MPL2 subtitles
+	if (codecLower.includes("vplayer")) return "txt";     // VPlayer subtitles
+
+	// Data Streams
+	if (codecLower.includes("ttf")) return "ttf";         // TrueType Font
+	if (codecLower.includes("otf")) return "otf";         // OpenType Font
+	if (codecLower.includes("bin")) return "bin";         // Generic binary
+	if (codecLower.includes("eia_608")) return "bin";     // Closed captions
+	if (codecLower.includes("timed_id3")) return "id3";   // Timed metadata
+	if (codecLower.includes("scte_35")) return "bin";     // SCTE-35 Data
+	if (codecLower.includes("klv")) return "klv";         // KLV Metadata
+	if (codecLower.includes("timed_metadata")) return "xml"; // XML Metadata
+
+	// Fallbacks for Unknown Codecs
+	if (typeLower === "audio") {
+		console.warn(`Unknown audio codec: ${codec}, defaulting to .mp3`);
+		return "mp3";
+	}
+	if (typeLower === "subtitle") {
+		console.warn(`Unknown subtitle codec: ${codec}, defaulting to .srt`);
+		return "srt";
+	}
+
+	console.warn(`Unknown codec type: ${type} (codec: ${codec}), defaulting to .bin`);
+	return "bin"; // Default fallback for other types
+}
+		
+
+function updateProgress(msg, _type){
+	document.getElementById("progress").textContent = msg;
+	if (_type=="error"){
+		document.getElementById("progress").style.color = "red";
+	} else if (_type=="success"){
+		document.getElementById("progress").style.color = "green";
+	} else {
+		document.getElementById("progress").style.color = "blue";
+	}
+}
+
+async function extractTracks(file) {
+	if (! ffmpegObject){
+		try {
+			ffmpegObject.exit();
+			ffmpegObject = null;
+		}catch{}
+		ffmpegObject = FFmpeg.createFFmpeg({
+		log: true
+		});
+	}
+	
+	const ffmpeg = ffmpegObject;
+	let metadata = "";
+	ffmpeg.setLogger(({ type, message }) => {
+		metadata += message + '\n';
+	});
+	
+	await ffmpeg.load();
+
+	const data = await file.arrayBuffer();
+	updateProgress("Loading video file for processing...", "info");
+	ffmpeg.FS("writeFile", "input.mp4", new Uint8Array(data));
+	
+	updateProgress("Retrieving metadata...", "info");
+	try {
+		await ffmpeg.run("-hide_banner", "-i", "input.mp4");
+	} catch (e) {
+	}
+	const streams = [];
+	const streamRegex = /Stream #(\d+:\d+)\((\w+)\): (\w+): ([^,]+)/g;
+	let match;
+
+	while ((match = streamRegex.exec(metadata)) !== null) {
+	  streams.push({
+		id: match[1],          // Stream index (e.g., "0:0", "0:1")
+		language: match[2],    // Language (e.g., "eng")
+		type: match[3],        // Stream type (e.g., "Video", "Audio")
+		codec: match[4].trim() // Codec (e.g., "h264", "aac")
+	  });
+	}
+
+	if (streams.length === 0) {
+	  return [];
+	}
+
+	const extractedFiles = [];
+	let stream_idx = 1;
+	for (const stream of streams) {
+		if (stream.type.toLowerCase() !== "audio") {
+			updateProgress(`Skipping ${stream.codec} stream`, "info");
+			continue;
+		}
+		
+		const codec = stream.codec.toLowerCase();
+		const extension = getExtensionForCodec(codec, stream.type);
+		if (extension=="bin"){
+			updateProgress("Can't determing correct extension, skipping", "info");
+			continue;
+		}
+		let lang = stream.language;
+		lang = lang.trim();
+		if (lang){
+			lang = "_"+lang; 
+		}
+		const outputName = `Audio_${stream_idx}${lang}.${extension}`;
+		updateProgress(`Extracting ${outputName}...`, "info");
+		  // Extract the stream
+		await ffmpeg.run(
+			"-i", "input.mp4",
+			"-map", `0:${stream.id.split(":")[1]}`,
+			"-c", "copy",
+			outputName
+		);
+		const filedata = ffmpeg.FS('readFile', outputName)
+		extractedFiles.push({
+			name: outputName,
+			data: filedata
+		});
+		stream_idx+=1;
+	}
+
+	return extractedFiles;
+}
+
+
+async function createZip(tracks) {
+	const zip = new JSZip();
+	tracks.forEach((track) => {
+		zip.file(track.name, track.data);
+	});
+	return await zip.generateAsync({ type: "blob" });
+}
+
+async function extractAudios() {
+	updateProgress("Starting audio extraction...","info");
+	document.getElementById("start-btn").textContent = "Extracting...";
+	document.getElementById("start-btn").disabled = true;
+	try {
+		const tracks = await extractTracks(selectedVideo);
+		if (tracks.length === 0) {
+			updateProgress("No audio tracks found.","error");
+		} else {
+			extractedStreams = tracks;
+			document.getElementById("start-btn").style.display = 'none';
+			document.getElementById("dl-btn").style.display = 'inline-block';
+			updateProgress(`${extractedStreams.length} audio(s) extracted successfully!`,"success");
+		}
+	} catch (error) {
+		console.log(error);
+		updateProgress("Something went wrong, try again!", "error");
+	} finally {
+		document.getElementById("start-btn").disabled = false;
+		document.getElementById("start-btn").textContent = "Extract Audio(s)";
+		if (ffmpegObject){
+			try {
+				ffmpegObject.exit();
+				ffmpegObject = null;
+			}catch{}
+		}
+	}
+}
+
+
+async function triggerSingleDownload(fileName, filedata) {
+    try {
+        const blob = new Blob([filedata], { type: 'application/octet-stream' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    } catch (error) {
+        console.error(`Failed to download ${fileName}:`, error);
+    }
+}
+
+async function downloadAudios() {
+	document.getElementById('dl-btn').textContent = "Downloading...";
+	document.getElementById('dl-btn').disabled = true;
+	try {
+		for (const stream of extractedStreams) {
+			await triggerSingleDownload(stream.name, stream.data);
+			await new Promise(resolve => setTimeout(resolve, 500));
+		}
+	}catch{
+		updateProgress("Error while downloading audios", "error");
+	} finally{
+		document.getElementById('dl-btn').disabled = false;
+		document.getElementById('dl-btn').textContent = "Download Audio(s)";
+	}
+	
+}
+</script>
+</div></div>
+		
+    </main>
+</div>
+
+
+<!-- Disqus Comments Section -->
+<div id="disqus-container" style="
+    position: relative; 
+    text-align: center; 
+    padding: 20px; /* Added padding for better spacing */
+    box-sizing: border-box; /* Ensures padding works consistently */
+    ">
+    <!-- Loading message, initially visible -->
+    <div id="disqus-loading" style="
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 10px;
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        font-size: 16px;
+        z-index: 1;
+        width: 90%; /* Ensures it's responsive */
+        max-width: 300px; /* Limits the width on larger screens */
+    ">
+        Loading Disqus comments...
+    </div>
+
+    <!-- Disqus thread div, wrapped in a container with fixed width -->
+    <div id="disqus_wrapper" style="
+        max-width: 800px; 
+        width: 100%; /* Full width on smaller screens */
+        margin: 0 auto; /* Centered */
+        ">
+        <div id="disqus_thread" style="min-height: 300px;"></div>
+    </div>
+</div>
+
+<script>
+    // Disqus configuration
+    var disqus_config = function () {
+        this.page.url = window.location.href;  // Page URL
+        this.page.identifier = window.location.pathname; // Unique identifier
+    };
+
+    // Embed Disqus
+    (function() {  
+        var d = document, s = d.createElement('script');
+        s.src = 'https://growthworldnet.disqus.com/embed.js'; // Your Disqus shortname
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+
+    // Function to hide loading message when Disqus iframe loads
+    function checkDisqusIframeLoaded() {
+        var disqusIframe = document.querySelector('#disqus_thread iframe');
+        if (disqusIframe) {
+            // Once the iframe is loaded, hide the loading message
+            disqusIframe.onload = function() {
+                document.getElementById('disqus-loading').style.display = 'none';
+            };
+        } else {
+            // Retry checking every 500ms until iframe is loaded
+            setTimeout(checkDisqusIframeLoaded, 500);
+        }
+    }
+
+    // Start checking for Disqus iframe
+    checkDisqusIframeLoaded();
+</script>
+
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+<script>
+    // Toggle the sidebar for mobile view
+    function toggleSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        sidebar.classList.toggle('show');
+    }
+	
+	// Attach event listener to document or a parent container for dynamic elements
+	document.addEventListener('click', function(event) {
+		if (event.target.closest('.open-tool')) {
+			// Find the closest <li> with the class 'open-link'
+			const liElement = event.target.closest('.open-tool');
+
+			// Find the <a> element inside the clicked <li>
+			const link = liElement.querySelector('a');
+			
+			if (link && link.href) {
+				// Open the <a> tag's href in a new tab
+				window.open(link.href, '_self');
+			}
+		}
+	});
+
+</script>
+<div>
+<style>
+    /* Sticky Sidebar */
+    #shareSidebar {
+      position: fixed;
+      top: 20%;
+      right: 0; /* Always visible */
+      z-index: 9999;
+      background-color: #fff;
+      padding: 10px;
+      border-radius: 0 5px 5px 0;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .share-buttons {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .share-buttons li {
+      margin: 10px 0;
+    }
+
+    .share-buttons li svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    /* Responsive adjustments for smaller screens */
+    @media (max-width: 768px) {
+      #shareSidebar {
+        right: 0; /* Fixed at 0 for small screens */
+        padding: 5px;
+      }
+
+      .share-buttons li svg {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  </style>
+<div id="shareSidebar">
+  <ul class="share-buttons">
+    <li><a id="facebook-share" href="#" title="Share on Facebook" target="_blank">
+      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"><path fill="#3b5998" d="M22.675 0H1.325C.594 0 0 .593 0 1.324v21.351C0 23.406.594 24 1.325 24H12.82V14.706H9.692v-3.68h3.128V8.413c0-3.097 1.894-4.788 4.662-4.788 1.325 0 2.463.098 2.795.142v3.24h-1.918c-1.504 0-1.796.715-1.796 1.762v2.308h3.588l-.467 3.68h-3.12V24h6.116C23.406 24 24 23.406 24 22.675V1.325C24 .594 23.406 0 22.675 0"></path></svg>
+    </a></li>
+    
+    <li><a id="twitter-share" href="#" title="Tweet" target="_blank">
+      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"><path fill="#1DA1F2" d="M23.954 4.569c-.885.391-1.83.656-2.825.775 1.014-.609 1.794-1.574 2.163-2.723-.949.555-2.003.959-3.127 1.184-.897-.957-2.178-1.555-3.594-1.555-2.719 0-4.924 2.205-4.924 4.924 0 .385.045.761.127 1.122C7.691 8.094 4.067 6.13 1.64 3.161c-.422.722-.664 1.561-.664 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.386 1.693 4.374 3.946 4.827-.412.111-.849.171-1.296.171-.317 0-.626-.03-.928-.085.631 1.953 2.445 3.376 4.6 3.416-1.68 1.318-3.809 2.102-6.114 2.102-.397 0-.79-.023-1.175-.067 2.179 1.396 4.768 2.211 7.548 2.211 9.054 0 14.004-7.497 14.004-13.986 0-.213 0-.426-.015-.637.961-.694 1.8-1.562 2.46-2.549l-.047-.02z"></path></svg>
+    </a></li>
+    
+    <li><a id="linkedin-share" href="#" title="Share on LinkedIn" target="_blank">
+      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"><path fill="#0077B5" d="M22.23 0H1.77C.79 0 0 .774 0 1.729v20.543C0 23.225.79 24 1.77 24h20.46C23.21 24 24 23.225 24 22.272V1.729C24 .774 23.21 0 22.23 0zM7.12 20.452H3.56V9H7.12v11.452zM5.34 7.648c-1.148 0-1.872-.786-1.872-1.764 0-.988.742-1.763 1.91-1.763 1.17 0 1.872.775 1.882 1.763 0 .978-.712 1.764-1.92 1.764zm13.872 12.804h-3.556v-6.23c0-1.565-.557-2.633-1.954-2.633-1.064 0-1.698.711-1.978 1.396-.102.243-.127.58-.127.92v6.547h-3.556s.046-10.633 0-11.452h3.556v1.623c.472-.729 1.32-1.77 3.216-1.77 2.35 0 4.108 1.534 4.108 4.831v6.768z"></path></svg>
+    </a></li>
+    
+    <li><a id="reddit-share" href="#" title="Submit to Reddit" target="_blank">
+      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"><path fill="#FF4500" d="M24 12c0-6.63-5.373-12-12-12S0 5.37 0 12c0 5.292 3.437 9.8 8.205 11.385-.113-.964-.213-2.443.045-3.492.237-1.015 1.522-6.476 1.522-6.476s-.388-.775-.388-1.922c0-1.8 1.043-3.145 2.348-3.145 1.106 0 1.64.83 1.64 1.826 0 1.115-.71 2.781-1.075 4.33-.302 1.275.635 2.313 1.88 2.313 2.254 0 3.976-2.378 3.976-5.797 0-2.39-1.716-4.078-4.167-4.078-2.841 0-4.508 2.134-4.508 4.343 0 .865.332 1.795.748 2.302.083.1.096.188.07.288-.077.315-.25.999-.283 1.14-.044.18-.144.22-.332.132-1.235-.574-2.008-2.374-2.008-3.833 0-3.108 2.25-5.97 6.487-5.97 3.404 0 6.05 2.427 6.05 5.678 0 3.364-2.122 6.086-5.07 6.086-1.015 0-1.968-.53-2.293-1.158l-.623 2.377c-.225.89-.84 2.004-1.255 2.682.94.283 1.92.44 2.946.44 6.628 0 12-5.37 12-12z"></path></svg>
+    </a></li>
+    
+    <li><a id="whatsapp-share" href="#" title="Share on WhatsApp" target="_blank">
+      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"><path fill="#25D366" d="M20.52 3.451c-4.293-4.293-11.243-4.293-15.537 0-4.293 4.294-4.293 11.243 0 15.537a10.892 10.892 0 0 0 7.737 3.204c1.356 0 2.685-.264 3.94-.793l3.98 1.062-.64-3.9a10.878 10.878 0 0 0 3.198-7.738 10.885 10.885 0 0 0-3.198-7.737zM12 21.432c-1.247 0-2.47-.243-3.613-.723l-.26-.107-2.362.63.627-2.353-.114-.24c-.678-1.439-.766-3.042-.246-4.58a8.99 8.99 0 0 1 8.479-6.187c2.4 0 4.654.934 6.343 2.624a8.968 8.968 0 0 1 2.625 6.343 8.992 8.992 0 0 1-6.185 8.481c-.86.292-1.764.44-2.667.44z"></path></svg>
+    </a></li>
+  </ul>
+</div>
+
+<script>
+  // Get the current page URL dynamically
+  const currentURL = encodeURIComponent(window.location.href);
+  const currentTitle = encodeURIComponent(document.title); // To use page title in social shares
+
+  // Update social media share links with dynamic URLs
+  document.getElementById('facebook-share').href = `https://www.facebook.com/sharer/sharer.php?u=${currentURL}`;
+  document.getElementById('twitter-share').href = `https://twitter.com/intent/tweet?url=${currentURL}&text=${currentTitle}`;
+  document.getElementById('linkedin-share').href = `https://www.linkedin.com/shareArticle?mini=true&url=${currentURL}&title=${currentTitle}&summary=${currentTitle}`;
+  document.getElementById('reddit-share').href = `https://www.reddit.com/submit?url=${currentURL}&title=${currentTitle}`;
+  document.getElementById('whatsapp-share').href = `https://api.whatsapp.com/send?text=${currentTitle}%20${currentURL}`;
+
+  // Debugging to ensure everything loads correctly
+  console.log('Social share buttons initialized.');
+  console.log('Page URL:', currentURL);
+  console.log('Page Title:', currentTitle);
+</script>
+</div>
+</body>
+</html>

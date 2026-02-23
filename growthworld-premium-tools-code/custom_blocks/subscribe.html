@@ -1,0 +1,117 @@
+<div class="checkout-wrapper">
+  <div class="checkout-thumbnail">
+    <img src="https://growthworld.net/growthworld-premium-tools/static/images/main.jpg" alt="PayPal Tool Pro - Automate and Enhance Your PayPal Workflow" />
+  </div>
+  <div class="checkout-details">
+    <h1 class="checkout-title"> GrowthWorld's Premium Tools Subscription</h1>
+    <p class="checkout-description">
+      Access GrowthWorld's best-in-class marketing tools, analytics, and support. Subscribe today for an instant competitive edge. Cancel anytime with no hassle.
+    </p>
+    <div class="checkout-pricing">
+      <span class="amount">$9.99/month</span>
+     
+    </div>
+    <div class="paypal-button" id="paypal-button-container"></div>
+  </div>
+</div>
+
+
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Helvetica Neue', sans-serif;
+  }
+
+  .checkout-wrapper {
+    max-width: 600px;
+    margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  .checkout-thumbnail img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+
+  .checkout-details {
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .checkout-title {
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: #222;
+  }
+
+  .checkout-description {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+  }
+
+  .checkout-pricing {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #111;
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
+  }
+
+  .checkout-pricing .period {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #777;
+  }
+
+  .paypal-button {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (max-width: 600px) {
+    .checkout-wrapper {
+      margin: 20px;
+      box-shadow: none;
+    }
+    .checkout-details {
+      padding: 1.25rem;
+    }
+    .checkout-title {
+      font-size: 1.5rem;
+    }
+    .checkout-pricing {
+      font-size: 1.3rem;
+    }
+  }
+</style>
+
+<script src="https://www.paypal.com/sdk/js?client-id={{custom_block_client_id}}&amp;vault=true&amp;intent=subscription"></script>
+
+<script>
+  paypal.Buttons({
+    createSubscription: function (data, actions) {
+      return actions.subscription.create({
+        plan_id: '{{custom_block_plan_id}}',
+        custom_id: '{{custom_block_custom_id}}'
+      });
+    },
+    onApprove: function (data, actions) {
+      // Redirect after subscription is approved
+      window.location.href = "/growthworld-premium-tools/subscription-success";
+    }
+  }).render('#paypal-button-container');
+</script>
