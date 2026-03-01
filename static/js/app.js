@@ -1,4 +1,6 @@
 (function () {
+  const base = window.GW_BASE || '';
+  const toUrl = (path) => `${base}${path}`;
   const root = document.documentElement;
   const toggle = document.getElementById('theme-toggle');
   const savedTheme = localStorage.getItem('gw_theme');
@@ -22,7 +24,7 @@
       e.preventDefault();
       const box = document.getElementById('review-errors');
       const data = new FormData(reviewForm);
-      const res = await fetch('/api/review/create', { method: 'POST', body: data });
+      const res = await fetch(toUrl('/api/review/create'), { method: 'POST', body: data });
       const json = await res.json();
       if (!json.ok) {
         box.innerHTML = '<ul class="list-clean">' + (json.errors || ['Unable to submit']).map(x => `<li>${x}</li>`).join('') + '</ul>';
@@ -40,7 +42,7 @@
       body.append('csrf', csrf);
       body.append('review_id', btn.dataset.id || '0');
       body.append('action', btn.dataset.action || '');
-      const res = await fetch('/api/review/moderate', { method: 'POST', body });
+      const res = await fetch(toUrl('/api/review/moderate'), { method: 'POST', body });
       const json = await res.json();
       msg.innerHTML = json.ok ? '<p class="ok">Review updated. Refreshing...</p>' : '<p class="notice">Failed to update review.</p>';
       if (json.ok) setTimeout(() => location.reload(), 600);
@@ -111,7 +113,7 @@
     const body = new FormData();
     body.append('csrf', form.querySelector('[name="csrf"]').value);
     body.append('payload', xor(JSON.stringify(obj)));
-    const res = await fetch('/api/service/create', { method: 'POST', body });
+    const res = await fetch(toUrl('/api/service/create'), { method: 'POST', body });
     const json = await res.json();
     if (!json.ok) {
       errorsBox.innerHTML = '<ul class="list-clean">' + json.errors.map(e => `<li>${e}</li>`).join('') + '</ul>';

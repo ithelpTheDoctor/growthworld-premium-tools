@@ -84,7 +84,7 @@
     <h2>Recent services (edit)</h2>
     <ul class="list-clean tight">
       <?php foreach ($servicesAdminList as $svc): ?>
-        <li><strong><?= e($svc['title']) ?></strong> <span class="meta">(<?= e($svc['service_type']) ?>)</span> · <a href="/admin?edit=<?= (int)$svc['id'] ?>">Edit</a></li>
+        <li><strong><?= e($svc['title']) ?></strong> <span class="meta">(<?= e($svc['service_type']) ?>)</span> · <a href="<?= e(url('/admin')) ?>?edit=<?= (int)$svc['id'] ?>">Edit</a></li>
       <?php endforeach; ?>
     </ul>
   </section>

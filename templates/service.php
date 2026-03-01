@@ -1,6 +1,6 @@
 <article class="card">
   <h1><?= e($service['title']) ?></h1>
-  <img class="feature-image" src="/<?= e($service['feature_image']) ?>" alt="<?= e($service['title']) ?>" loading="lazy">
+  <img class="feature-image" src="<?= e(url('/')) ?><?= e($service['feature_image']) ?>" alt="<?= e($service['title']) ?>" loading="lazy">
   <p><?= e($service['seo_description']) ?></p>
 
   <?php foreach (preg_split('/\R+/', $service['long_description']) as $para): ?>

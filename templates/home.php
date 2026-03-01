@@ -4,8 +4,8 @@
     <h1>Build faster workflows with curated premium tools for browser, Windows, and extension users.</h1>
     <p>Join members who use GrowthWorld tools to save time, improve consistency, and launch faster every day.</p>
     <div class="form-actions">
-      <a class="btn btn-primary" href="/services">Browse services</a>
-      <a class="btn btn-muted" href="/services">Start subscription</a>
+      <a class="btn btn-primary" href="<?= e(url('/services')) ?>">Browse services</a>
+      <a class="btn btn-muted" href="<?= e(url('/services')) ?>">Start subscription</a>
     </div>
   </div>
   <div class="card">
@@ -53,7 +53,7 @@
       <article class="card">
         <h3><?= e($item['title']) ?></h3>
         <p class="meta"><?= e($item['seo_description']) ?></p>
-        <a class="btn btn-muted" href="/service/<?= e($item['slug']) ?>">View service</a>
+        <a class="btn btn-muted" href="<?= e(url('/service/')) ?><?= e($item['slug']) ?>">View service</a>
       </article>
     <?php endforeach; ?>
   </div>

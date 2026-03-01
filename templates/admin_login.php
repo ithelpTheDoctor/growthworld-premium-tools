@@ -3,7 +3,7 @@
   <p>Secure sign-in for service publishing and subscription operations.</p>
 </section>
 
-<form method="post" action="/admin/login">
+<form method="post" action="<?= e(url('/admin/login')) ?>">
   <?php if (!empty($_SESSION['flash'])): ?><p class="notice"><?= e($_SESSION['flash']); unset($_SESSION['flash']); ?></p><?php endif; ?>
   <input type="hidden" name="csrf" value="<?= e(csrf_token()) ?>">
   <label>User</label>

@@ -2,7 +2,7 @@
 return [
     'app' => [
         'name' => 'GrowthWorld Premium Tools',
-        'base_url' => 'https://growthworld.net/growthworld-premium-tools-test',
+        'base_url' => 'https://growthworld.net/xyz',
         'public_email' => 'info@growthworld.net',
         'contact_forward_email' => 'ithelpthedoctor@gmail.com',
         'currency' => 'USD',

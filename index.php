@@ -2,7 +2,12 @@
 require __DIR__ . '/core/bootstrap.php';
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$path = trim(str_replace('/growthworld-premium-tools-test', '', $uri), '/');
+$basePath = app_base_path();
+$pathOnly = $uri ?? '/';
+if ($basePath && str_starts_with($pathOnly, $basePath)) {
+    $pathOnly = substr($pathOnly, strlen($basePath));
+}
+$path = trim($pathOnly, '/');
 $page = $path ?: 'home';
 
 apply_cors_headers();
@@ -135,16 +140,16 @@ if ($page === 'api/review/moderate' && $_SERVER['REQUEST_METHOD'] === 'POST') {
 if ($page === 'admin/login' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!check_csrf($_POST['csrf'] ?? '')) {
         $_SESSION['flash'] = 'Invalid CSRF token.';
-        header('Location: /admin/login');
+        header('Location: ' . url('/admin/login'));
         exit;
     }
     if (($_POST['username'] ?? '') === cfg('admin.username') && ($_POST['password'] ?? '') === cfg('admin.password')) {
         $_SESSION['admin'] = true;
-        header('Location: /admin');
+        header('Location: ' . url('/admin'));
         exit;
     }
     $_SESSION['flash'] = 'Invalid admin credentials';
-    header('Location: /admin/login');
+    header('Location: ' . url('/admin/login'));
     exit;
 }
 

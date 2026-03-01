@@ -52,6 +52,17 @@ function table_name(string $base): string {
     return cfg('database.table_prefix') . $base;
 }
 
+function app_base_path(): string {
+    $baseUrlPath = (string)(parse_url((string)cfg('app.base_url'), PHP_URL_PATH) ?? '');
+    $baseUrlPath = '/' . trim($baseUrlPath, '/');
+    return $baseUrlPath === '/' ? '' : $baseUrlPath;
+}
+
+function url(string $path = ''): string {
+    $path = '/' . ltrim($path, '/');
+    return app_base_path() . ($path === '/' ? '' : $path);
+}
+
 function xor_encrypt(string $plain, string $key): string {
     $out = '';
     for ($i = 0, $j = 0; $i < strlen($plain); $i++, $j++) {
@@ -94,7 +105,7 @@ function is_logged_in(): bool {
 
 function require_admin(): void {
     if (empty($_SESSION['admin'])) {
-        header('Location: /admin/login');
+        header('Location: ' . url('/admin/login'));
         exit;
     }
 }
