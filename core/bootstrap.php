@@ -53,9 +53,36 @@ function table_name(string $base): string {
 }
 
 function app_base_path(): string {
+    static $cached = null;
+    if ($cached !== null) return $cached;
+
+    // 1) explicit override from environment/config if provided
+    $envBase = trim((string)($_SERVER['APP_BASE_PATH'] ?? getenv('APP_BASE_PATH') ?: ''));
+    if ($envBase !== '') {
+        $envBase = '/' . trim($envBase, '/');
+        return $cached = ($envBase === '/' ? '' : $envBase);
+    }
+
+    $cfgBase = trim((string)(cfg('app.base_path') ?? ''));
+    if ($cfgBase !== '') {
+        $cfgBase = '/' . trim($cfgBase, '/');
+        return $cached = ($cfgBase === '/' ? '' : $cfgBase);
+    }
+
+    // 2) auto-detect from executing script location (works for subdirectory deploys)
+    $scriptName = (string)($_SERVER['SCRIPT_NAME'] ?? '');
+    if ($scriptName !== '') {
+        $dir = str_replace('\\', '/', dirname($scriptName));
+        $dir = '/' . trim($dir, '/');
+        if ($dir !== '/' && $dir !== '/.') {
+            return $cached = $dir;
+        }
+    }
+
+    // 3) fallback from configured base_url path
     $baseUrlPath = (string)(parse_url((string)cfg('app.base_url'), PHP_URL_PATH) ?? '');
     $baseUrlPath = '/' . trim($baseUrlPath, '/');
-    return $baseUrlPath === '/' ? '' : $baseUrlPath;
+    return $cached = ($baseUrlPath === '/' ? '' : $baseUrlPath);
 }
 
 function url(string $path = ''): string {
