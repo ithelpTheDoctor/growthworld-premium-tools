@@ -51,8 +51,15 @@ if ($page === 'signup' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $otp = (string)random_int(100000, 999999);
     $now = time();
     $hash = password_hash($password, cfg('security.password_algo'));
-    $sql = 'INSERT INTO ' . table_name('temp_users') . ' (name,email,password_hash,otp_code,otp_expires_at,created_at) VALUES (?,?,?,?,?,?) ON DUPLICATE KEY UPDATE name=VALUES(name), password_hash=VALUES(password_hash), otp_code=VALUES(otp_code), otp_expires_at=VALUES(otp_expires_at), created_at=VALUES(created_at)';
-    $pdo->prepare($sql)->execute([$name, $email, $hash, $otp, $now + 600, $now]);
+    $checkTmp = $pdo->prepare('SELECT id FROM ' . table_name('temp_users') . ' WHERE email=? LIMIT 1');
+    $checkTmp->execute([$email]);
+    if ($checkTmp->fetch()) {
+        $pdo->prepare('UPDATE ' . table_name('temp_users') . ' SET name=?, password_hash=?, otp_code=?, otp_expires_at=?, created_at=? WHERE email=?')
+            ->execute([$name, $hash, $otp, $now + 600, $now, $email]);
+    } else {
+        $pdo->prepare('INSERT INTO ' . table_name('temp_users') . ' (name,email,password_hash,otp_code,otp_expires_at,created_at) VALUES (?,?,?,?,?,?)')
+            ->execute([$name, $email, $hash, $otp, $now + 600, $now]);
+    }
 
     @mail($email, 'GrowthWorld OTP Verification', "Your OTP code is: {$otp}\nValid for 10 minutes.", 'From: no-reply@growthworld.net');
     $_SESSION['otp_email'] = $email;
@@ -101,9 +108,15 @@ if ($page === 'subscribe' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!check_csrf($_POST['csrf'] ?? '')) { $_SESSION['flash'] = 'Invalid CSRF token.'; header('Location: ' . url('/subscribe')); exit; }
     $now = time();
     $subId = 'manual-' . $currentUserId;
-    $sql = 'INSERT INTO ' . table_name('subscriptions') . ' (user_id,paypal_subscription_id,status,last_event,last_checked,created_at,updated_at) VALUES (?,?,?,?,?,?,?)
-            ON DUPLICATE KEY UPDATE status=VALUES(status), last_event=VALUES(last_event), last_checked=VALUES(last_checked), updated_at=VALUES(updated_at)';
-    $pdo->prepare($sql)->execute([$currentUserId, $subId, 'ACTIVE', 'MANUAL_ACTIVATION', $now, $now, $now]);
+    $checkSub = $pdo->prepare('SELECT id FROM ' . table_name('subscriptions') . ' WHERE user_id=? LIMIT 1');
+    $checkSub->execute([$currentUserId]);
+    if ($checkSub->fetch()) {
+        $pdo->prepare('UPDATE ' . table_name('subscriptions') . ' SET paypal_subscription_id=?, status=?, last_event=?, last_checked=?, updated_at=? WHERE user_id=?')
+            ->execute([$subId, 'ACTIVE', 'MANUAL_ACTIVATION', $now, $now, $currentUserId]);
+    } else {
+        $pdo->prepare('INSERT INTO ' . table_name('subscriptions') . ' (user_id,paypal_subscription_id,status,last_event,last_checked,created_at,updated_at) VALUES (?,?,?,?,?,?,?)')
+            ->execute([$currentUserId, $subId, 'ACTIVE', 'MANUAL_ACTIVATION', $now, $now, $now]);
+    }
     $_SESSION['flash'] = 'Subscription activated (test mode).';
     header('Location: ' . url('/account'));
     exit;
@@ -242,8 +255,16 @@ if ($page === 'api/review/create' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     if (strlen($review) < 20 || strlen($review) > 800) $errors[] = 'Review must be between 20 and 800 characters.';
     if ($errors) { echo json_encode(['ok' => false, 'errors' => $errors]); exit; }
 
-    $sql = 'INSERT INTO ' . table_name('reviews') . ' (user_id,rating,review_text,status,is_favorite,created_at) VALUES (?,?,?,?,?,?) ON DUPLICATE KEY UPDATE rating=VALUES(rating), review_text=VALUES(review_text), status="pending", is_favorite=0, created_at=VALUES(created_at), approved_at=NULL';
-    $pdo->prepare($sql)->execute([$currentUserId, $rating, $review, 'pending', 0, time()]);
+    $nowR = time();
+    $existingReview = $pdo->prepare('SELECT id FROM ' . table_name('reviews') . ' WHERE user_id=? LIMIT 1');
+    $existingReview->execute([$currentUserId]);
+    if ($existingReview->fetch()) {
+        $pdo->prepare('UPDATE ' . table_name('reviews') . ' SET rating=?, review_text=?, status="pending", is_favorite=0, created_at=?, approved_at=NULL WHERE user_id=?')
+            ->execute([$rating, $review, $nowR, $currentUserId]);
+    } else {
+        $pdo->prepare('INSERT INTO ' . table_name('reviews') . ' (user_id,rating,review_text,status,is_favorite,created_at) VALUES (?,?,?,?,?,?)')
+            ->execute([$currentUserId, $rating, $review, 'pending', 0, $nowR]);
+    }
     echo json_encode(['ok' => true]);
     exit;
 }
