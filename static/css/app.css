@@ -92,3 +92,15 @@ textarea { resize: vertical; min-height: 110px; }
   nav#main-nav { display: none; width: 100%; flex-direction: column; align-items: stretch; gap: .4rem; padding-top: .5rem; }
   nav#main-nav.open { display: flex; }
 }
+
+.share-row{display:flex;gap:.55rem;flex-wrap:wrap;align-items:center;margin:.8rem 0}
+.share-row a{padding:.35rem .55rem;border:1px solid var(--border);border-radius:8px;background:var(--panel-2);text-decoration:none}
+.menu-backdrop{display:none}
+.menu-close{display:none}
+@media (max-width:760px){
+  .menu-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:29;display:none}
+  .menu-backdrop.open{display:block}
+  nav#main-nav{position:fixed;right:.5rem;top:.5rem;z-index:30;background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:.8rem;width:min(320px,92vw);max-height:85vh;overflow:auto;box-shadow:var(--shadow)}
+  .menu-close{display:inline-flex;align-self:flex-end}
+}
+.video-wrap{max-width:920px;margin:0 auto 1rem}

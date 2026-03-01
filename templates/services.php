@@ -9,6 +9,7 @@
 <div class="grid-2">
   <?php foreach ($services as $svc): ?>
     <article class="card">
+      <p class="tag"><?= e(service_type_label($svc['service_type'] ?? 'browser')) ?></p>
       <h2><?= e($svc['title']) ?></h2>
       <p class="meta"><?= e($svc['seo_description']) ?></p>
       <a class="btn btn-primary" href="<?= e(url('/service/')) ?><?= e($svc['slug']) ?>">Use this service</a>

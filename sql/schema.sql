@@ -8,6 +8,17 @@ CREATE TABLE IF NOT EXISTS premium_users (
     updated_at BIGINT NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+
+CREATE TABLE IF NOT EXISTS premium_temp_users (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(120) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    otp_code VARCHAR(10) NOT NULL,
+    otp_expires_at BIGINT NOT NULL,
+    created_at BIGINT NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 CREATE TABLE IF NOT EXISTS premium_user_sessions (
     user_id BIGINT UNSIGNED NOT NULL,
     session_token VARCHAR(128) NOT NULL UNIQUE,

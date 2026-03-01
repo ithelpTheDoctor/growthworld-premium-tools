@@ -8,7 +8,7 @@
   <article class="card">
     <h2>Support information</h2>
     <p><strong>Public support email:</strong> <?= e(cfg('app.public_email')) ?></p>
-    <p><strong>Internal routing:</strong> form requests are also forwarded to <?= e(cfg('app.contact_forward_email')) ?>.</p>
+    <p><strong>Internal routing:</strong> all support form messages are handled securely by our internal support workflow.</p>
     <p>We support users globally. If your request is related to data rights or account privacy, mention your country/region in the form.</p>
   </article>
 

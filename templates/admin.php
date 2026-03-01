@@ -125,3 +125,40 @@
   </div>
 </section>
 <?php endif; ?>
+
+
+<?php if ($tab === 'reviews'): ?>
+<section class="card section-block">
+  <h2>Approved Feedback</h2>
+  <form method="get" action="<?= e(url('/admin')) ?>" class="form-actions">
+    <input type="hidden" name="tab" value="reviews">
+    <input type="text" name="q" value="<?= e($reviewSearch ?? '') ?>" placeholder="Search by name, email, or text">
+    <button class="btn btn-muted" type="submit">Search</button>
+  </form>
+  <ul class="list-clean tight" id="approved-list">
+    <?php foreach (($approvedReviews ?? []) as $r): ?>
+      <li data-review-id="<?= (int)$r['id'] ?>">
+        <strong><?= e($r['name']) ?></strong> (<?= (int)$r['rating'] ?>/5)
+        <p><?= e($r['review_text']) ?></p>
+        <button class="btn btn-muted review-action" data-id="<?= (int)$r['id'] ?>" data-action="favorite"><?= (int)$r['is_favorite'] ? 'Unfavorite' : 'Favorite' ?></button>
+      </li>
+    <?php endforeach; ?>
+  </ul>
+  <div class="form-actions">
+    <a class="btn btn-muted" href="<?= e(url('/admin')) ?>?tab=reviews&rp=<?= max(1, (int)($reviewPage ?? 1) + 1) ?>&q=<?= urlencode($reviewSearch ?? '') ?>">Load more approved</a>
+  </div>
+</section>
+
+<section class="card section-block">
+  <h2>Favorite List</h2>
+  <ul class="list-clean tight" id="favorite-list">
+    <?php foreach (($favoriteReviews ?? []) as $r): ?>
+      <li data-review-id="<?= (int)$r['id'] ?>">
+        <strong><?= e($r['name']) ?></strong> (<?= (int)$r['rating'] ?>/5)
+        <p><?= e($r['review_text']) ?></p>
+        <button class="btn btn-muted review-action" data-id="<?= (int)$r['id'] ?>" data-action="favorite">Remove favorite</button>
+      </li>
+    <?php endforeach; ?>
+  </ul>
+</section>
+<?php endif; ?>

@@ -51,7 +51,8 @@ try {
     $pdo = new PDO('sqlite::memory:');
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $pdo->exec('CREATE TABLE premium_services (id INTEGER PRIMARY KEY, title TEXT, seo_description TEXT, slug TEXT, is_active INTEGER, updated_at INTEGER, service_type TEXT, feature_image TEXT, long_description TEXT, tool_html TEXT, download_url TEXT, extension_url TEXT, demo_tutorial_url TEXT)');
-    $pdo->exec('CREATE TABLE premium_users (id INTEGER PRIMARY KEY, name TEXT, email TEXT)');
+    $pdo->exec('CREATE TABLE premium_users (id INTEGER PRIMARY KEY, name TEXT, email TEXT, password_hash TEXT, status TEXT, created_at INTEGER, updated_at INTEGER)');
+    $pdo->exec('CREATE TABLE premium_temp_users (id INTEGER PRIMARY KEY, name TEXT, email TEXT, password_hash TEXT, otp_code TEXT, otp_expires_at INTEGER, created_at INTEGER)');
     $pdo->exec('CREATE TABLE premium_reviews (id INTEGER PRIMARY KEY, user_id INTEGER, rating INTEGER, review_text TEXT, status TEXT, is_favorite INTEGER, created_at INTEGER, approved_at INTEGER)');
     $pdo->exec('CREATE TABLE premium_subscriptions (id INTEGER PRIMARY KEY, user_id INTEGER, status TEXT)');
     $pdo->exec('CREATE TABLE premium_service_features (id INTEGER PRIMARY KEY, service_id INTEGER, feature_text TEXT, sort_order INTEGER)');

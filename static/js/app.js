@@ -34,11 +34,22 @@
     });
   }
 
-  // mobile menu
+  // mobile menu popup behavior
   const menuToggle = document.getElementById('menu-toggle');
   const nav = document.getElementById('main-nav');
+  const backdrop = document.getElementById('menu-backdrop');
+  const menuClose = document.getElementById('menu-close');
+  const closeMenu = () => { nav?.classList.remove('open'); backdrop?.classList.remove('open'); };
+  const openMenu = () => { nav?.classList.add('open'); backdrop?.classList.add('open'); };
   if (menuToggle && nav) {
-    menuToggle.addEventListener('click', () => nav.classList.toggle('open'));
+    menuToggle.addEventListener('click', () => nav.classList.contains('open') ? closeMenu() : openMenu());
+    menuClose?.addEventListener('click', closeMenu);
+    backdrop?.addEventListener('click', closeMenu);
+    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+    document.addEventListener('click', (e) => {
+      if (!nav.classList.contains('open')) return;
+      if (!nav.contains(e.target) && e.target !== menuToggle) closeMenu();
+    });
   }
 
   const reviewForm = document.getElementById('review-form');
@@ -59,6 +70,8 @@
 
   document.querySelectorAll('.review-action').forEach(btn => {
     btn.addEventListener('click', async () => {
+      if (btn.disabled) return;
+      btn.disabled = true;
       const csrf = document.getElementById('admin-review-csrf')?.value || '';
       const msg = document.getElementById('review-admin-msg');
       const body = new FormData();
@@ -67,8 +80,19 @@
       body.append('action', btn.dataset.action || '');
       const res = await fetch(toUrl('/api/review/moderate'), { method: 'POST', body });
       const json = await res.json();
-      msg.innerHTML = json.ok ? '<p class="ok">Review updated. Refreshing...</p>' : '<p class="notice">Failed to update review.</p>';
-      if (json.ok) setTimeout(() => location.reload(), 600);
+      if (!json.ok) {
+        msg.innerHTML = '<p class="notice">Failed to update review.</p>';
+        btn.disabled = false;
+        return;
+      }
+      msg.innerHTML = '<p class="ok">Review updated.</p>';
+      const row = btn.closest('tr, li');
+      const action = btn.dataset.action;
+      if (row && (action === 'approve' || action === 'reject')) row.remove();
+      if (row && action === 'favorite') {
+        btn.textContent = (json.row && Number(json.row.is_favorite) === 1) ? 'Unfavorite' : 'Favorite';
+      }
+      btn.disabled = false;
     });
   });
 
