@@ -4,8 +4,16 @@
     <h1>Build faster workflows with curated premium tools for browser, Windows, and extension users.</h1>
     <p>Join members who use GrowthWorld tools to save time, improve consistency, and launch faster every day.</p>
     <div class="form-actions">
-      <a class="btn btn-primary" href="<?= e(url('/services')) ?>">Browse services</a>
-      <a class="btn btn-muted" href="<?= e(url('/services')) ?>">Start subscription</a>
+      <?php if (!$loggedIn): ?>
+        <a class="btn btn-primary" href="<?= e(url('/signup')) ?>">Create free account</a>
+        <a class="btn btn-muted" href="<?= e(url('/login')) ?>">Login</a>
+      <?php elseif (!$isSubscribed): ?>
+        <a class="btn btn-primary" href="<?= e(url('/subscribe')) ?>">Start subscription</a>
+        <a class="btn btn-muted" href="<?= e(url('/services')) ?>">Browse services</a>
+      <?php else: ?>
+        <a class="btn btn-primary" href="<?= e(url('/services')) ?>">Use premium services</a>
+        <a class="btn btn-muted" href="<?= e(url('/feedback')) ?>">Leave feedback</a>
+      <?php endif; ?>
     </div>
   </div>
   <div class="card">
@@ -25,24 +33,6 @@
     <article class="card"><h3>1. Discover</h3><p class="meta">Find the right tool quickly from a focused premium catalog built for action.</p></article>
     <article class="card"><h3>2. Subscribe</h3><p class="meta">Activate your plan and unlock secure account-based usage across services.</p></article>
     <article class="card"><h3>3. Scale</h3><p class="meta">Apply repeatable workflows and compound productivity with each release.</p></article>
-  </div>
-</section>
-
-<section class="section-block">
-  <h2 class="section-title">Conversion path</h2>
-  <div class="grid-3">
-    <div class="card"><strong>Create account</strong><p class="meta">Sign up with your email to set up secure access.</p></div>
-    <div class="card"><strong>Activate membership</strong><p class="meta">Subscribe and unlock all premium service pages.</p></div>
-    <div class="card"><strong>Use and grow</strong><p class="meta">Apply tools, track results, and leave feedback for future updates.</p></div>
-  </div>
-</section>
-
-<section class="section-block">
-  <h2 class="section-title">Platform stats</h2>
-  <div class="grid-3">
-    <div class="card"><strong><?= (int)$serviceCount ?></strong><p class="meta">Active services</p></div>
-    <div class="card"><strong>$<?= number_format((float)cfg('app.monthly_price'), 2) ?></strong><p class="meta">Monthly subscription</p></div>
-    <div class="card"><strong>24/7 access</strong><p class="meta">Use your tools when needed</p></div>
   </div>
 </section>
 

@@ -3,6 +3,9 @@
   <p>Explore specialized tools, scripts, and extension workflows included in your membership.</p>
 </section>
 
+<?php if (!$services): ?>
+  <section class="card"><p>No services published yet. Please check back soon.</p></section>
+<?php else: ?>
 <div class="grid-2">
   <?php foreach ($services as $svc): ?>
     <article class="card">
@@ -12,7 +15,10 @@
     </article>
   <?php endforeach; ?>
 </div>
+<?php endif; ?>
 
+<?php if (!empty($hasMore)): ?>
 <div class="form-actions">
   <a class="btn btn-muted" href="<?= e(url('/services')) ?>?p=<?= $pageNum + 1 ?>">Load more services</a>
 </div>
+<?php endif; ?>

@@ -1,14 +1,30 @@
 (function () {
   const base = window.GW_BASE || '';
   const toUrl = (path) => `${base}${path}`;
+
+  // external links open new tab
+  document.querySelectorAll('a[href^="http"]').forEach((a) => {
+    try {
+      const u = new URL(a.href, location.href);
+      if (u.host !== location.host) {
+        a.setAttribute('target', '_blank');
+        a.setAttribute('rel', 'noopener noreferrer');
+      }
+    } catch (_) {}
+  });
+
+  // theme
   const root = document.documentElement;
   const toggle = document.getElementById('theme-toggle');
   const savedTheme = localStorage.getItem('gw_theme');
   const systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
   root.setAttribute('data-theme', savedTheme || (systemDark ? 'dark' : 'light'));
-
   if (toggle) {
-    const setLabel = () => { toggle.textContent = root.getAttribute('data-theme') === 'dark' ? 'Dark' : 'Light'; };
+    const setLabel = () => {
+      const dark = root.getAttribute('data-theme') === 'dark';
+      toggle.textContent = dark ? '☀️' : '🌙';
+      toggle.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+    };
     setLabel();
     toggle.addEventListener('click', () => {
       const next = (root.getAttribute('data-theme') || 'light') === 'dark' ? 'light' : 'dark';
@@ -16,6 +32,13 @@
       localStorage.setItem('gw_theme', next);
       setLabel();
     });
+  }
+
+  // mobile menu
+  const menuToggle = document.getElementById('menu-toggle');
+  const nav = document.getElementById('main-nav');
+  if (menuToggle && nav) {
+    menuToggle.addEventListener('click', () => nav.classList.toggle('open'));
   }
 
   const reviewForm = document.getElementById('review-form');
@@ -61,6 +84,7 @@
   const rowDownload = document.getElementById('download-row');
   const rowExt = document.getElementById('extension-row');
   const rowHtml = document.getElementById('html-row');
+  const submitBtn = document.getElementById('service-submit');
 
   const xorKey = atob(window.GW_XOR_OBF || '').split('').reverse().join('');
   const xor = (text) => {
@@ -110,15 +134,29 @@
       return;
     }
 
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting...';
+    }
+
     const body = new FormData();
     body.append('csrf', form.querySelector('[name="csrf"]').value);
     body.append('payload', xor(JSON.stringify(obj)));
+    const fileField = form.querySelector('[name="feature_image"]');
+    if (fileField && fileField.files && fileField.files[0]) body.append('feature_image', fileField.files[0]);
+
     const res = await fetch(toUrl('/api/service/create'), { method: 'POST', body });
     const json = await res.json();
     if (!json.ok) {
       errorsBox.innerHTML = '<ul class="list-clean">' + json.errors.map(e => `<li>${e}</li>`).join('') + '</ul>';
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Save service';
+      }
       return;
     }
-    errorsBox.innerHTML = '<p class="ok">Service saved successfully.</p>';
+
+    form.style.display = 'none';
+    errorsBox.innerHTML = '<p class="ok">Service saved successfully.</p><p><a class="btn btn-primary" href="' + toUrl('/admin?tab=create') + '">Create new service</a></p>';
   });
 })();

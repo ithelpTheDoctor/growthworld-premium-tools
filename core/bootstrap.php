@@ -190,3 +190,22 @@ function user_has_active_subscription(int $userId): bool {
     $status = strtoupper((string)$stmt->fetchColumn());
     return in_array($status, ['ACTIVE','APPROVAL_PENDING'], true);
 }
+
+function youtube_embed_url(?string $url): string {
+    $url = trim((string)$url);
+    if ($url === '') return '';
+    $parts = parse_url($url);
+    if (!$parts) return '';
+    $host = strtolower($parts['host'] ?? '');
+    $path = $parts['path'] ?? '';
+    $videoId = '';
+    if (str_contains($host, 'youtu.be')) {
+        $videoId = trim($path, '/');
+    } elseif (str_contains($host, 'youtube.com')) {
+        parse_str($parts['query'] ?? '', $q);
+        $videoId = $q['v'] ?? '';
+        if (!$videoId && str_starts_with($path, '/embed/')) $videoId = basename($path);
+    }
+    if (!preg_match('/^[A-Za-z0-9_-]{6,20}$/', (string)$videoId)) return '';
+    return 'https://www.youtube.com/embed/' . $videoId;
+}
