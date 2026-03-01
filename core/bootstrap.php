@@ -22,6 +22,30 @@ try {
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
     ]);
+
+    // Auto-initialize schema on first deploy if premium tables are missing.
+    try {
+        $prefix = (string)($config['database']['table_prefix'] ?? 'premium_');
+        $keyTable = $prefix . 'services';
+        $check = $pdo->prepare("SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = ? LIMIT 1");
+        $check->execute([$keyTable]);
+        $exists = (bool)$check->fetchColumn();
+
+        if (!$exists) {
+            $schemaPath = __DIR__ . '/../sql/schema.sql';
+            if (is_file($schemaPath)) {
+                $schemaSql = file_get_contents($schemaPath) ?: '';
+                $statements = array_filter(array_map('trim', explode(';', $schemaSql)));
+                foreach ($statements as $statement) {
+                    if ($statement !== '') {
+                        $pdo->exec($statement);
+                    }
+                }
+            }
+        }
+    } catch (Throwable $schemaErr) {
+        error_log('[bootstrap] Schema initialization warning: ' . $schemaErr->getMessage());
+    }
 } catch (Throwable $e) {
     error_log('[bootstrap] DB unavailable: ' . $e->getMessage());
     $pdo = new PDO('sqlite::memory:');
